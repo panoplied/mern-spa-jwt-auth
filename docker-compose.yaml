@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:5.0.14
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-root}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS:-root}
+      - MONGO_INITDB_DATABASE=${MONGO_DB:-auth-spa}
+    ports:
+      - ${MONGO_LOCAL_PORT:-27017}:${MONGO_DOCKER_PORT:-27017}
+    volumes:
+      - db:/data/db
+
+volumes:
+  db:
