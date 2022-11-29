@@ -49,12 +49,28 @@ userSchema.statics.signup = async function (email, password) {
     throw Error("Email already in use");
   }
 
-  // Encrypt the password
+  // Encrypt password and store credentials
   const salt = await bcrypt.genSalt(SALT_ROUNDS);
   const hash = await bcrypt.hash(password, salt);
-
-  // Store user credentials
   const user = await this.create({ email, password: hash });
+
+  return user;
+};
+
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("All fields are required");
+  }
+
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("No user with such email found");
+  }
+
+  const passwordMatched = await bcrypt.compare(password, user.password);
+  if (!passwordMatched) {
+    throw Error("Password incorrect");
+  }
 
   return user;
 };
