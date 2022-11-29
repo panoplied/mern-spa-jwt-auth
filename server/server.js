@@ -21,6 +21,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test server response
+app.get("/", (req, res) => {
+  res.json({ mssg: "ok" });
+});
+// ---
+
 app.use("/api/user", userRoutes);
 
 app.listen(API_PORT, () => {
