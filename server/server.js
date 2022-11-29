@@ -23,6 +23,6 @@ app.use((req, res, next) => {
 
 app.use("/api/user", userRoutes);
 
-app.listen(PORT, () => {
+app.listen(API_PORT, () => {
   console.log(`API is listening on port ${API_PORT}`);
 });
