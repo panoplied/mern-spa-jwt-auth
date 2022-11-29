@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 
-require('dotenv').config();
+require("dotenv").config();
 const PORT = process.env.PORT;
 
 const app = express();
@@ -13,8 +13,8 @@ app.use((req, res, next) => {
 });
 
 // Set up route
-app.get('/', (req, res) => {
-  res.json({message: 'API is running'});
+app.get("/", (req, res) => {
+  res.json({ message: "API is running" });
 });
 
 // Listen for client requests
