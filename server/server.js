@@ -1,23 +1,17 @@
-const express = require("express");
-
 require("dotenv").config();
 const PORT = process.env.PORT;
 
+const express = require("express");
 const app = express();
+const userRoutes = require("./routes/user");
 
-// Set up middleware
+app.use(express.json());
 app.use((req, res, next) => {
-  // test requests
-  console.log(`Requested ${req.path} with ${req.method} method`);
   next();
 });
 
-// Set up route
-app.get("/", (req, res) => {
-  res.json({ message: "API is running" });
-});
+app.use("/api/user", userRoutes);
 
-// Listen for client requests
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`API is listening on port ${PORT}`);
 });
