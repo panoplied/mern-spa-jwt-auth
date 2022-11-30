@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isPending, error } = useLogin();
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
@@ -15,14 +17,12 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    // TODO implement actual login request
-    console.log("DEBUG | LOGIN | ", email, password);
+    await login(email, password);
   };
 
   return (
     <>
-      <Link to="/">Home</Link>
-      <h1>Login Page</h1>
+      <h1>Login</h1>
       <form onSubmit={submitHandler}>
         <label>Email</label>
         <input
@@ -36,7 +36,10 @@ const Login = () => {
           onChange={passwordChangeHandler}
           value={password}
         />
+        <button disabled={isPending}>Login</button>
+        {error && <p>ERROR: {error}</p>}
       </form>
+      <Link to="/signup">Signup</Link>
     </>
   );
 };

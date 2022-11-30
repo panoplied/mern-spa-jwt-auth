@@ -1,11 +1,24 @@
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
+
+  const logoutClickHandler = () => {
+    logout();
+  }
+
   return (
     <>
       <h1>Home Page</h1>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Signup</Link>
+      {user && (
+        <div>
+          <p>{user.email}</p>
+          <button onClick={logoutClickHandler}>Logout</button>
+        </div>
+      )}
     </>
   );
 };
