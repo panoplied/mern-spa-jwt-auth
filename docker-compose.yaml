@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 
 services:
   mongo:
@@ -21,14 +21,14 @@ services:
     restart: unless-stopped
     env_file: ./.env
     environment:
-      - API_PORT=${API_CONTAINER_PORT}
+      - API_PORT=${API_CONTAINER_PORT:-8080}
       - MONGO_HOST=mongo
-      - MONGO_USER=${MONGO_USER}
-      - MONGO_PASS=${MONGO_PASS}
-      - MONGO_DB_NAME=${MONGO_DB_NAME}
-      - MONGO_PORT=${MONGO_CONTAINER_PORT}
+      - MONGO_USER=${MONGO_USER:-root}
+      - MONGO_PASS=${MONGO_PASS:-root}
+      - MONGO_DB_NAME=${MONGO_DB_NAME:-auth-spa}
+      - MONGO_PORT=${MONGO_CONTAINER_PORT:-27017}
     ports:
-      - ${API_HOST_PORT}:${API_CONTAINER_PORT}
+      - ${API_HOST_PORT:-5000}:${API_CONTAINER_PORT:-8080}
     stdin_open: true
     tty: true
 
