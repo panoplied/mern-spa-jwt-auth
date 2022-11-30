@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup, isPending, error } = useSignup();
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
@@ -15,8 +17,7 @@ const Signup = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    // TODO implement actual signup request
-    console.log("DEBUG | SIGNUP | ", email, password);
+    await signup(email, password);
   };
 
   return (
@@ -36,7 +37,8 @@ const Signup = () => {
           onChange={passwordChangeHandler}
           value={password}
         />
-        <button>Signup</button>
+        <button disabled={isPending}>Signup</button>
+        {error && <p>ERROR: {error}</p>}
       </form>
     </>
   );

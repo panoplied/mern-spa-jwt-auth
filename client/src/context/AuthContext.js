@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }) => {
   });
 
   // TODO remove debug logging
-  console.log(`DEBUG | AuthContext state: ${state}`);
+  console.log('DEBUG | AuthContext state:', state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
