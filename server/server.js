@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const userRoutes = require("./routes/user");
+const nftRoutes = require("./routes/nft");
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/nft", nftRoutes);
 
 app.listen(API_PORT, () => {
   console.log(`API is listening on port ${API_PORT}`);

@@ -22,11 +22,14 @@ services:
     env_file: ./.env
     environment:
       - API_PORT=${API_CONTAINER_PORT:-8080}
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
       - MONGO_HOST=mongo
       - MONGO_USER=${MONGO_USER:-root}
       - MONGO_PASS=${MONGO_PASS:-root}
       - MONGO_DB_NAME=${MONGO_DB_NAME:-auth-spa}
       - MONGO_PORT=${MONGO_CONTAINER_PORT:-27017}
+      - ALCHEMY_BASE_URL=${ALCHEMY_BASE_URL:-https://eth-mainnet.alchemyapi.io/v2/}
+      - ALCHEMY_API_KEY=${ALCHEMY_API_KEY}
     ports:
       - ${API_HOST_PORT:-5000}:${API_CONTAINER_PORT:-8080}
     stdin_open: true
