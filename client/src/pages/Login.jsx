@@ -22,6 +22,7 @@ const Login = () => {
 
   return (
     <>
+      <p><Link to="/">Home</Link></p>
       <h1>Login</h1>
       <form onSubmit={submitHandler}>
         <label>Email</label>
@@ -39,7 +40,7 @@ const Login = () => {
         <button disabled={isPending}>Login</button>
         {error && <p>ERROR: {error}</p>}
       </form>
-      <Link to="/signup">Signup</Link>
+      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </>
   );
 };
