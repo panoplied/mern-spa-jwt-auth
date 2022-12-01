@@ -2,13 +2,15 @@
 
 Current dev run routine
 
-## Run both Mongo and API in Docker containers:
+## Run fullstack (UI, API and Mongo at once) in containers with Docker Compose:
 
 ```
 docker-compose up
 ```
 
-This will expose the API on `API_HOST_PORT` according to `./env`, which is `5000` by default: http://localhost:5000
+This will run the UI on `UI_HOST_PORT` accordint to `./env`, which is `80` by default. So to view app in the browser, just open http://localhost.
+
+For testing endpoints the API will be exposed on `API_HOST_PORT`, which is `8080` for Docker build, http://localhost:8080
 
 ## Run local dev version of the API
 

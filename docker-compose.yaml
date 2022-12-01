@@ -31,9 +31,23 @@ services:
       - ALCHEMY_BASE_URL=${ALCHEMY_BASE_URL:-https://eth-mainnet.alchemyapi.io/v2/}
       - ALCHEMY_API_KEY=${ALCHEMY_API_KEY}
     ports:
-      - ${API_HOST_PORT:-5000}:${API_CONTAINER_PORT:-8080}
+      - ${API_HOST_PORT:-8080}:${API_CONTAINER_PORT:-5000}
+
+  ui:
+    depends_on:
+      - api
+    build: ./client
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - REACT_APP_API_HOST=http://localhost
+      - REACT_APP_API_PORT=${API_HOST_PORT:-8080}
+      - REACT_APP_API_PATH=api
     stdin_open: true
     tty: true
+    ports:
+      - ${UI_HOST_PORT:-80}:${UI_CONTAINER_PORT:-3000}
+
 
 volumes:
   db:

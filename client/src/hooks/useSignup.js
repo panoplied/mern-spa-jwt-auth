@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
-// TODO make proper base URL setting
-const API_BASE_URL = "http://localhost:4000/api";
+import API_BASE_URL from "../env";
 
 export const useSignup = () => {
   const [isPending, setIsPending] = useState(null);
