@@ -1,4 +1,4 @@
-import { useLogout } from "../hooks/useLogout";
+import { useLogout } from "../../hooks/useLogout";
 
 import Avatar from "boring-avatars";
 
@@ -9,12 +9,14 @@ const UserProfile = ({ user }) => {
     logout();
   };
 
-  const generativeUserPic = <Avatar
-    size={256}
-    name={user.email}
-    variant="pixel"
-    colors={["#330708", "#E84624", "#E87624", "#E8A726", "#E8D826"]} 
-  />
+  const generativeUserPic = (
+    <Avatar
+      size={256}
+      name={user.email}
+      variant="pixel"
+      colors={["#330708", "#E84624", "#E87624", "#E8A726", "#E8D826"]}
+    />
+  );
 
   return (
     <div>
