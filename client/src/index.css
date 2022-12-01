@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Glass TTY VT220";
+  src: url("./fonts/Glass_TTY_VT220.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Orden Web Regular";
+  src: url("./fonts/Orden_Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  font-family: "Glass TTY VT220";
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  line-height: 30px;
+}
