@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // Components
 import UserProfile from "../components/UserProfile";
 import Scanlines from "../components/Scanlines";
+import NFTMonitor from "../components/NFTMonitor";
 
 // Resources
 import ConeVideo from "../video/cone1440.webm";
@@ -28,6 +29,7 @@ const Home = () => {
         <source src={ConeVideo} type="video/webm" />
       </video>
 
+      <NFTMonitor />
     </>
   );
 };
