@@ -35,8 +35,8 @@ const NftMonitor = () => {
     return transfers;
   };
 
-  const ETH_ZERO_ADDR = "0x0000000000000000000000000000000000000000";
-  const ETH_DEAD_ADDR = "0x000000000000000000000000000000000000DEAD";
+  const ETH_ZERO_ADDR = "0X0000000000000000000000000000000000000000";
+  const ETH_DEAD_ADDR = "0X000000000000000000000000000000000000DEAD";
 
   const formattedTransfers = transfers
     .filter(t => t.asset !== null)
@@ -45,8 +45,8 @@ const NftMonitor = () => {
         key={t.uniqueId}
         erc={t.category.toUpperCase()}
         title={t.asset}
-        mint={t.from === ETH_ZERO_ADDR}
-        burn={t.to.toUpperCase() === ETH_DEAD_ADDR || t.to === ETH_ZERO_ADDR}
+        mint={t.from.toUpperCase() === ETH_ZERO_ADDR}
+        burn={t.to.toUpperCase() === ETH_DEAD_ADDR || t.to.toUpperCase() === ETH_ZERO_ADDR} 
         from={t.from.toUpperCase()}
         to={t.to.toUpperCase()}
       />
