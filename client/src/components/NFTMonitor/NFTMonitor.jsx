@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import TransferRecord from "./TransferRecord";
 import API_BASE_URL from "../../env";
 
+import styles from "./NFTMonitor.module.css";
+
 const NftMonitor = () => {
   const [transfers, setTransfers] = useState([]);
+  const TRANSFERS_UPDATE_RATE = 5000;
 
   useEffect(() => {
     const updateTransfers = async () => {
@@ -21,10 +24,10 @@ const NftMonitor = () => {
 
     const interval = setInterval(() => {
       updateTransfers();
-    }, 5000);
+    }, TRANSFERS_UPDATE_RATE);
 
     return () => clearInterval(interval);
-  }, [transfers]);
+  }, []);
 
   const fetchTransfers = async () => {
     const response = await fetch(`${API_BASE_URL}/nft/transfers`);
@@ -33,7 +36,7 @@ const NftMonitor = () => {
   };
 
   const ETH_ZERO_ADDR = "0x0000000000000000000000000000000000000000";
-  const ETH_DEAD_ADDR = "0x000000000000000000000000000000000000dEaD";
+  const ETH_DEAD_ADDR = "0x000000000000000000000000000000000000DEAD";
 
   const formattedTransfers = transfers
     .filter(t => t.asset !== null)
@@ -43,15 +46,17 @@ const NftMonitor = () => {
         erc={t.category.toUpperCase()}
         title={t.asset}
         mint={t.from === ETH_ZERO_ADDR}
-        burn={t.to === ETH_ZERO_ADDR || t.to === ETH_DEAD_ADDR}
+        burn={t.to.toUpperCase() === ETH_DEAD_ADDR || t.to === ETH_ZERO_ADDR}
         from={t.from.toUpperCase()}
         to={t.to.toUpperCase()}
       />
     ));
 
-  console.log(formattedTransfers);
-
-  return <>{formattedTransfers}</>;
+  return (
+    <div className={styles.nft_monitor}>
+      {formattedTransfers}
+    </div>
+  );
 };
 
 export default NftMonitor;

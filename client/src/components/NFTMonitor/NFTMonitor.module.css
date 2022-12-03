@@ -1,0 +1,9 @@
+.nft_monitor {
+  font-family: theme(fontFamily.VT220);
+  font-size: 20px;
+  line-height: 30px;
+  position: fixed;
+  top: 0;
+  word-break: break-all;
+  z-index: -999;
+}

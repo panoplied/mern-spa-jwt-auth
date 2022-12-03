@@ -1,0 +1,48 @@
+
+.lime {
+  color: var(--color-lime);
+  text-shadow:
+    0 0 1px var(--color-lime),
+    0 0 2px var(--color-lime),
+    0 0 4px var(--color-lime);
+}
+
+.red {
+  color: var(--color-red);
+  text-shadow:
+    0 0 1px var(--color-red),
+    0 0 2px var(--color-red),
+    0 0 4px var(--color-red);
+}
+
+.green {
+  color: var(--color-green);
+  text-shadow:
+    0 0 1px var(--color-green),
+    0 0 2px var(--color-green),
+    0 0 4px var(--color-green);
+}
+
+.amber {
+  color: var(--color-amber);
+  text-shadow:
+    0 0 1px var(--color-amber),
+    0 0 2px var(--color-amber),
+    0 0 4px var(--color-amber);
+}
+
+.cyan {
+  color: var(--color-cyan);
+  text-shadow:
+    0 0 1px var(--color-cyan),
+    0 0 2px var(--color-cyan),
+    0 0 4px var(--color-cyan);
+}
+
+.white {
+  color: var(--color-white);
+  text-shadow:
+    0 0 1px var(--color-white),
+    0 0 2px var(--color-white),
+    0 0 4px var(--color-white);
+}

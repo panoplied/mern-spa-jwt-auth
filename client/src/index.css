@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Glass TTY VT220";
   src: url("./fonts/Glass_TTY_VT220.ttf") format("truetype");
@@ -12,10 +16,19 @@
   font-weight: normal;
 }
 
+@layer base {
+  :root {
+    --color-black: theme(colors.black);
+    --color-white: theme(colors.slate.50);
+    --color-lime: theme(colors.lime.400);
+    --color-red: theme(colors.red.600);
+    --color-green: theme(colors.green.400);
+    --color-amber: theme(colors.amber.400);
+    --color-cyan: theme(colors.cyan.400);
+  }
+}
+
 body {
-  font-family: "Glass TTY VT220";
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  line-height: 30px;
+  background-color: var(--color-black); 
+  color: var(--color-white);
 }
