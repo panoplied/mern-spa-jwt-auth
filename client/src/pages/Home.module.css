@@ -1,3 +1,8 @@
 .auth {
-  background-color: var(--color-red);
+  text-align: center;
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

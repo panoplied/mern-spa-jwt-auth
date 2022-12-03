@@ -25,16 +25,32 @@
     --color-green: theme(colors.green.400);
     --color-amber: theme(colors.amber.400);
     --color-cyan: theme(colors.cyan.400);
+
+    --color-blue: theme(colors.blue.600);
+    --color-yellow: theme(colors.yellow.400);
   }
 }
 
 body {
   background-color: var(--color-black); 
   color: var(--color-white);
+  font-family: theme(fontFamily.VT220);
+  font-size: 20px;
+  line-height: 30px;
 }
 
 h1.title {
   font-family: theme(fontFamily.orden);
+  margin: 8rem auto;
   font-size: 128px;
   text-align: center;
+}
+
+button {
+  background-color: var(--color-blue);
+}
+
+input {
+  background-color: var(--bolor-black);
+  border-width: 2px;
 }
