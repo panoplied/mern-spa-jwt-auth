@@ -1,12 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
-// Pages
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-
-// Components
+import AuthForm from "./components/AuthForm";
+import UserProfile from "./components/UserProfile";
 import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
 import Scanlines from "./components/Scanlines";
 import NFTMonitor from "./components/NFTMonitor";
@@ -22,16 +18,26 @@ function App() {
           <BackgroundVideo />
         </>
       )}
-      <Scanlines />
-      <NFTMonitor />
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-          <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
+          <Route
+            path="/"
+            element={!user ? <AuthForm mode="initial" /> : <UserProfile user={user} />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <AuthForm mode="login" /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <AuthForm mode="signup" /> : <Navigate to="/" />}
+          />
         </Routes>
       </BrowserRouter>
+     
+      <Scanlines />
+      <NFTMonitor />
     </>
   );
 }
