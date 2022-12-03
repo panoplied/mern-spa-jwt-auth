@@ -32,3 +32,9 @@ body {
   background-color: var(--color-black); 
   color: var(--color-white);
 }
+
+h1.title {
+  font-family: theme(fontFamily.orden);
+  font-size: 128px;
+  text-align: center;
+}

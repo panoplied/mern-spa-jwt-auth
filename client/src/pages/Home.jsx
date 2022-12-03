@@ -11,8 +11,6 @@ const Home = () => {
 
   return (
     <>
-      <h1 className={styles.title}>AEThERNA</h1>
-
       {user && <UserProfile user={user} />}
 
       {!user && (
@@ -21,7 +19,6 @@ const Home = () => {
           <Link to="/signup">Sign Up</Link>
         </Panel>
       )}
-
     </>
   );
 };

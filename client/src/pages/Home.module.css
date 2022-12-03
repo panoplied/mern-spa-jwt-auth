@@ -1,5 +1,3 @@
-.title {
-  font-family: theme(fontFamily.orden);
-  font-size: 128px;
-  text-align: center;
+.auth {
+  background-color: var(--color-red);
 }
