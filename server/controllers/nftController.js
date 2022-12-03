@@ -1,8 +1,10 @@
 const ethers = require("ethers");
+
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const { ALCHEMY_BASE_URL, ALCHEMY_API_KEY } = process.env;
+const BLOCKS_AGO = 30;
 
 const alchemy = new ethers.providers.AlchemyProvider(
   "homestead",
@@ -11,7 +13,7 @@ const alchemy = new ethers.providers.AlchemyProvider(
 
 const getNftTransfers = async (req, res) => {
   const latestBlock = await alchemy.getBlockNumber();
-  const manyBlocksAgo = latestBlock - 10;
+  const fromBlock = latestBlock - BLOCKS_AGO;
 
   const reqBody = JSON.stringify({
     jsonrpc: "2.0",
@@ -19,7 +21,7 @@ const getNftTransfers = async (req, res) => {
     method: "alchemy_getAssetTransfers",
     params: [
       {
-        fromBlock: ethers.utils.hexlify(manyBlocksAgo),
+        fromBlock: ethers.utils.hexlify(fromBlock),
         excludeZeroValue: true,
         category: ["erc721", "erc1155", "specialnft"],
       },
