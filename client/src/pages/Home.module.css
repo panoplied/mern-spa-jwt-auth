@@ -1,0 +1,34 @@
+.title {
+  font-family: theme(fontFamily.orden);
+  font-size: 128px;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.video {
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: -1;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .video {
+    width: auto;
+    height: 100%;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .video {
+    width: 100%;
+    height: auto;
+  }
+}
