@@ -2,7 +2,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 
 import UserProfile from "../components/UserProfile";
-import BackgroundVideo from "../components/BackgroundVideo/BackgroundVideo";
+import Panel from '../components/Panel';
+
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -15,13 +16,12 @@ const Home = () => {
       {user && <UserProfile user={user} />}
 
       {!user && (
-        <div>
+        <Panel className={styles.auth}>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-        </div>
+        </Panel>
       )}
 
-      <BackgroundVideo />
     </>
   );
 };

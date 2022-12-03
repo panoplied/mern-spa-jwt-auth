@@ -1,6 +1,7 @@
 import { useLogout } from "../../hooks/useLogout";
 
 import Avatar from "boring-avatars";
+import Panel from "../Panel";
 
 const UserProfile = ({ user }) => {
   const { logout } = useLogout();
@@ -19,11 +20,11 @@ const UserProfile = ({ user }) => {
   );
 
   return (
-    <div>
+    <Panel>
       <p>Logged in as {user.email}</p>
       <div>{generativeUserPic}</div>
       <button onClick={logoutClickHandler}>Logout</button>
-    </div>
+    </Panel>
   );
 };
 

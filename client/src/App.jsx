@@ -7,8 +7,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 // Components
-import NFTMonitor from "./components/NFTMonitor";
+import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
 import Scanlines from './components/Scanlines'
+import NFTMonitor from "./components/NFTMonitor";
 
 function App() {
   const { user } = useAuthContext();
@@ -32,6 +33,7 @@ function App() {
         </Routes>
       </BrowserRouter>
 
+      {!user && <BackgroundVideo />}
       <Scanlines />
       <NFTMonitor />
     </>

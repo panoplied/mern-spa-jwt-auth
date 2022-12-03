@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
+import Panel from "../components/Panel";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <Panel>
       <p><Link to="/">Home</Link></p>
       <h1>Login</h1>
       <form onSubmit={submitHandler}>
@@ -41,7 +42,7 @@ const Login = () => {
         {error && <p>ERROR: {error}</p>}
       </form>
       <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-    </>
+    </Panel>
   );
 };
 
