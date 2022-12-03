@@ -1,36 +1,34 @@
-import styles from "./TransferRecord.module.css";
-
 const TransferRecord = ({ erc, title, mint, burn, from, to }) => {
 
   const txAction = (
     <>
       {mint && (
         <>
-          <span className={styles.lime}>MINT </span>
-          <span className={styles.cyan}>TO {to}</span>
+          <span className="crtLime">MINT </span>
+          <span className="crtCyan">TO {to}</span>
         </>
       )}
       {burn && (
         <>
-          <span className={styles.red}>BURN </span>
-          <span className={styles.cyan}>BY {from}</span>
+          <span className="crtRed">BURN </span>
+          <span className="crtCyan">BY {from}</span>
         </>
       )}
       {!mint && !burn && (
         <>
-          <span className={styles.green}>SALE/TRANSFER </span>
-          <span className={styles.cyan}>FROM {from} TO {to}</span>
+          <span className="crtGreen">SALE/TRANSFER </span>
+          <span className="crtCyan">FROM {from} TO {to}</span>
         </>
       )}
     </>
   );
 
-  const separator = <span className={styles.white}>  </span>
+  const separator = "  ";
 
   return (
     <>
-      <span className={styles.cyan}>{erc} NFT: </span>
-      <span className={styles.amber}>{title} </span>
+      <span className="crtCyan">{erc} NFT: </span>
+      <span className="crtAmber">{title} </span>
       {txAction}
       {separator}
     </>

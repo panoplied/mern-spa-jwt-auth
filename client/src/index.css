@@ -32,7 +32,7 @@
     line-height: 30px;
 
     background-color: var(--color-black); 
-    color: var(--color-white);
+    @apply crtWhite;
   }
 }
 
@@ -41,6 +41,7 @@ h1.title {
   margin: 4rem auto;
   font-size: 4rem;
   text-align: center;
+  text-shadow: none;
 }
 
 button {
@@ -52,4 +53,48 @@ button {
 input {
   background-color: var(--bolor-black);
   border-width: 2px;
+}
+
+/* CRT-like text styles are global, UI look/feel assumes them everywhere */
+.crtLime {
+  color: var(--color-lime);
+  text-shadow:
+    0 0 1px var(--color-lime),
+    0 0 2px var(--color-lime),
+    0 0 4px var(--color-lime);
+}
+.crtRed {
+  color: var(--color-red);
+  text-shadow:
+    0 0 1px var(--color-red),
+    0 0 2px var(--color-red),
+    0 0 4px var(--color-red);
+}
+.crtGreen {
+  color: var(--color-green);
+  text-shadow:
+    0 0 1px var(--color-green),
+    0 0 2px var(--color-green),
+    0 0 4px var(--color-green);
+}
+.crtAmber {
+  color: var(--color-amber);
+  text-shadow:
+    0 0 1px var(--color-amber),
+    0 0 2px var(--color-amber),
+    0 0 4px var(--color-amber);
+}
+.crtCyan {
+  color: var(--color-cyan);
+  text-shadow:
+    0 0 1px var(--color-cyan),
+    0 0 2px var(--color-cyan),
+    0 0 4px var(--color-cyan);
+}
+.crtWhite {
+  color: var(--color-white);
+  text-shadow:
+    0 0 1px var(--color-white),
+    0 0 2px var(--color-white),
+    0 0 4px var(--color-white);
 }
