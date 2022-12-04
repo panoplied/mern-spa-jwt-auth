@@ -7,6 +7,7 @@ import Panel from "../Panel";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = ({ mode }) => {
+  const formAction = mode.toUpperCase();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isPending: isLoginPending, error: loginError } = useLogin();
@@ -37,36 +38,60 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
+  const ActiveMode = () => (
+    <>
+      <div className={styles.title}>
+        <h1>{formAction}</h1>
+        <Link to="/">
+          <button className="bg-red-500">
+            ESC
+          </button>
+        </Link>
+      </div>
+      <form onSubmit={submitHandler} className={styles.form}>
+        <input
+          type="email"
+          placeholder="EMAIL"
+          value={email}
+          onChange={emailChangeHandler}
+        />
+        <input
+          type="password"
+          placeholder="PASSWORD"
+          value={password}
+          onChange={passwordChangeHandler}
+        />
+        <button disabled={isLoginPending || isSignupPenging}>
+          {formAction}
+        </button>
+      </form>
+      <Error />
+    </>
+  );
+
+  const Error = () => (
+    <>
+      {mode === "signup" && (
+        <>
+          <p>{signupError}</p>    
+          <p>Already a user?</p>
+          <p><Link to="/login">LOGIN</Link></p>
+        </>
+      )}
+      {mode === "login" && (
+        <>
+          <p>{loginError}</p>
+          <p>Don't have an account?</p>
+          <p><Link to="/signup">SIGN UP</Link></p>
+        </>
+      )}
+    </>
+  );
+
   return (
     <Panel className={styles.auth}>
       {mode === "initial" && <InitialMode />}
-      {mode !== "initial" && (
-        <>
-          <div className={styles.title}>
-            <h1>{mode.toUpperCase()}</h1>
-            <Link to="/"><button>ESC</button></Link>
-          </div>
-          <form onSubmit={submitHandler} className={''}>
-            <label>Email</label>
-            <input type="email" onChange={emailChangeHandler} value={email} />
-            <label>Password</label>
-            <input type="password" onChange={passwordChangeHandler} value={password} />
-            <button disabled={isLoginPending || isSignupPenging}>{mode}</button>
-          </form>
-          {mode !== "login" && (
-            <>
-              <p>ERROR: {signupError}</p>
-              <p>Already a user? <Link to="/login">Login</Link></p>
-            </>
-          )}
-          {mode !== "signup" && (
-            <>
-              <p>ERROR: {loginError}</p>
-              <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-            </>
-          )}
-        </>
-      )}
+      {mode !== "initial" && <ActiveMode />}
     </Panel>
   );
 };
