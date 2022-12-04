@@ -38,7 +38,16 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
-  const Error = () => (
+  const FormTitle = () => (
+    <div className={styles.title}>
+      <h1>{formAction}</h1>
+      <Link to="/">
+        <button className="bg-red-500">ESC</button>
+      </Link>
+    </div>
+  );
+
+  const FormFooter = () => {
     <>
       {mode === "signup" && (
         <>
@@ -59,21 +68,14 @@ const AuthForm = ({ mode }) => {
         </>
       )}
     </>
-  );
+  };
 
   return (
     <Panel className={styles.auth}>
       {mode === "initial" && <InitialMode />}
       {mode !== "initial" && (
         <>
-          <div className={styles.title}>
-            <h1>{formAction}</h1>
-            <Link to="/">
-              <button className="bg-red-500">
-                ESC
-              </button>
-            </Link>
-          </div>
+          <FormTitle />
           <form onSubmit={submitHandler} className={styles.form}>
             <input
               type="email"
@@ -93,7 +95,7 @@ const AuthForm = ({ mode }) => {
               {formAction}
             </button>
           </form>
-          <Error />
+          <FormFooter />
         </>
       )}
     </Panel>

@@ -47,12 +47,27 @@
   }
 }
 
-h1.title {
+.title {
   font-family: theme(fontFamily.orden);
   margin: calc(4rem + 5vh) auto;
-  font-size: calc(4em + 5vw);
+  font-size: 3em;
   text-align: center;
   text-shadow: none;
+}
+@media (min-width: 360px) {
+  .title {
+    font-size: calc(3em + 0.5vw);
+  }
+}
+@media (min-width: 480px) {
+  .title {
+    font-size: calc(4em + 0.5vw);
+  }
+}
+@media (min-width: 720px) {
+  .title {
+    font-size: calc(5em + 5vw);
+  }
 }
 
 button {
@@ -70,8 +85,8 @@ button:active {
 }
 
 input {
-  width: 100%;
   @apply crtWhite;
+  width: 100%;
   background-color: var(--color-black);
   border-width: 2px;
   padding: 0.5em;
@@ -79,13 +94,13 @@ input {
   letter-spacing: 2px;
 }
 input:focus {
-  outline: none;
   @apply crtGreen;
+  outline: none;
   border-color: var(--color-green);
 }
 input::placeholder {
-  opacity: 80%;
   @apply crtWhite;
+  opacity: 80%;
 }
 input:focus::placeholder {
   @apply crtGreen;
