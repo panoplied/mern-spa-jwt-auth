@@ -38,51 +38,24 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
-  const ActiveMode = () => (
-    <>
-      <div className={styles.title}>
-        <h1>{formAction}</h1>
-        <Link to="/">
-          <button className="bg-red-500">
-            ESC
-          </button>
-        </Link>
-      </div>
-      <form onSubmit={submitHandler} className={styles.form}>
-        <input
-          type="email"
-          placeholder="EMAIL"
-          value={email}
-          onChange={emailChangeHandler}
-        />
-        <input
-          type="password"
-          placeholder="PASSWORD"
-          value={password}
-          onChange={passwordChangeHandler}
-        />
-        <button disabled={isLoginPending || isSignupPenging}>
-          {formAction}
-        </button>
-      </form>
-      <Error />
-    </>
-  );
-
   const Error = () => (
     <>
       {mode === "signup" && (
         <>
           <p>{signupError}</p>    
           <p>Already a user?</p>
-          <p><Link to="/login">LOGIN</Link></p>
+          <p className="crtCyan">
+            <Link to="/login">LOGIN</Link>
+          </p>
         </>
       )}
       {mode === "login" && (
         <>
           <p>{loginError}</p>
           <p>Don't have an account?</p>
-          <p><Link to="/signup">SIGN UP</Link></p>
+          <p className="crtCyan">
+            <Link to="/signup">SIGN UP</Link>
+          </p>
         </>
       )}
     </>
@@ -91,7 +64,38 @@ const AuthForm = ({ mode }) => {
   return (
     <Panel className={styles.auth}>
       {mode === "initial" && <InitialMode />}
-      {mode !== "initial" && <ActiveMode />}
+      {mode !== "initial" && (
+        <>
+          <div className={styles.title}>
+            <h1>{formAction}</h1>
+            <Link to="/">
+              <button className="bg-red-500">
+                ESC
+              </button>
+            </Link>
+          </div>
+          <form onSubmit={submitHandler} className={styles.form}>
+            <input
+              type="email"
+              placeholder="EMAIL"
+              value={email}
+              onChange={emailChangeHandler}
+              required
+            />
+            <input
+              type="password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={passwordChangeHandler}
+              required
+            />
+            <button disabled={isLoginPending || isSignupPenging}>
+              {formAction}
+            </button>
+          </form>
+          <Error />
+        </>
+      )}
     </Panel>
   );
 };

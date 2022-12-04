@@ -60,6 +60,7 @@ button {
   background-color: var(--color-button);
   width: 100%;
   padding: 0.5em;
+  letter-spacing: 2px;
 }
 button:hover {
   background-color: var(--color-button-hover);
@@ -69,16 +70,26 @@ button:active {
 }
 
 input {
-  text-align: center;
+  width: 100%;
+  @apply crtWhite;
   background-color: var(--color-black);
   border-width: 2px;
   padding: 0.5em;
-  @apply crtWhite;
+  text-align: center;
+  letter-spacing: 2px;
 }
 input:focus {
   outline: none;
   @apply crtGreen;
   border-color: var(--color-green);
+}
+input::placeholder {
+  opacity: 80%;
+  @apply crtWhite;
+}
+input:focus::placeholder {
+  @apply crtGreen;
+  opacity: 50%;
 }
 input[type="password"] {
   font-family: theme(fontFamily.VT220Pass);
