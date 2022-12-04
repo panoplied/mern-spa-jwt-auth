@@ -1,0 +1,28 @@
+.auth {
+  min-width: 20vw;
+  text-align: center;
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.initial {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.title {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  background-color: var(--color-cyan);
+}
+
+.title > :last-child {
+  background-color: var(--color-red);
+  margin-left: auto;
+}

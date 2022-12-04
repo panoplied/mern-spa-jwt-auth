@@ -1,7 +1,6 @@
 .panel {
   margin: 0 auto;
   width: max-content;
-  padding: 30px;
   background-color: var(--color-black);
   border-style: double;
   border-width: 6px;

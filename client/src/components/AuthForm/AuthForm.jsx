@@ -4,6 +4,8 @@ import { useSignup } from "../../hooks/useSignup";
 import { Link } from "react-router-dom";
 import Panel from "../Panel";
 
+import styles from "./AuthForm.module.css";
+
 const AuthForm = ({ mode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,21 +31,22 @@ const AuthForm = ({ mode }) => {
   }
 
   const InitialMode = () => (
-    <>
-      <h1>Initial</h1>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Sign up</Link>
-    </>
+    <div className={styles.initial}>
+      <Link to="/login"><button>LOGIN</button></Link>
+      <Link to="/signup"><button>SIGN UP</button></Link>
+    </div>
   );
 
   return (
-    <Panel>
+    <Panel className={styles.auth}>
       {mode === "initial" && <InitialMode />}
       {mode !== "initial" && (
         <>
-          <h1>{mode}</h1>
-          <Link to="/"><button>close</button></Link>
-          <form onSubmit={submitHandler}>
+          <div className={styles.title}>
+            <h1>{mode.toUpperCase()}</h1>
+            <Link to="/"><button>ESC</button></Link>
+          </div>
+          <form onSubmit={submitHandler} className={''}>
             <label>Email</label>
             <input type="email" onChange={emailChangeHandler} value={email} />
             <label>Password</label>
@@ -52,13 +55,13 @@ const AuthForm = ({ mode }) => {
           </form>
           {mode !== "login" && (
             <>
-              <p>ERROR: {loginError}</p>
+              <p>ERROR: {signupError}</p>
               <p>Already a user? <Link to="/login">Login</Link></p>
             </>
           )}
           {mode !== "signup" && (
             <>
-              <p>ERROR: {signupError}</p>
+              <p>ERROR: {loginError}</p>
               <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
             </>
           )}
