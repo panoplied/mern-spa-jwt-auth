@@ -25,10 +25,11 @@
     --color-green: theme(colors.green.400);
     --color-amber: theme(colors.amber.400);
     --color-cyan: theme(colors.cyan.400);
+    --color-blue: theme(colors.blue.600);
 
     --color-button: theme(colors.blue.600);
-    --color-button-hover: theme(colors.violet.600);
-    --color-button-active: theme(colors.violet.500);
+    --color-button-hover: theme(colors.green.500);
+    --color-button-active: theme(colors.yellow.400);
 
     font-family: theme(fontFamily.VT220);
     font-size: 20px;
@@ -41,8 +42,8 @@
 
 h1.title {
   font-family: theme(fontFamily.orden);
-  margin: 4rem auto;
-  font-size: 4rem;
+  margin: calc(4rem + 5vh) auto;
+  font-size: calc(4em + 5vw);
   text-align: center;
   text-shadow: none;
 }
@@ -63,6 +64,8 @@ button:active {
 input {
   background-color: var(--color-black);
   border-width: 2px;
+  padding: 0.5em;
+  @apply crtWhite;
 }
 
 /* CRT-like text styles are global, UI look/feel assumes them everywhere */

@@ -1,11 +1,10 @@
 .auth {
-  min-width: 20vw;
+  min-width: 280px;
   text-align: center;
   position: relative;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 }
 
 .initial {
@@ -13,16 +12,28 @@
   flex-direction: column;
   padding: 20px;
   gap: 20px;
+  min-width: 280px;
 }
 
 .title {
   display: flex;
   text-align: left;
   align-items: center;
-  background-color: var(--color-cyan);
+  background-color: var(--color-blue);
 }
 
+.title > :first-child {
+  margin-left: 20px;
+}
 .title > :last-child {
   background-color: var(--color-red);
   margin-left: auto;
+}
+
+.form {
+  display: flex;
+  width: 600px;
+  gap: 20px;
+  flex-direction: column;
+  padding: 20px;
 }
