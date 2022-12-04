@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         VT220: ['Glass TTY VT220'],
+        VT220Pass: ['Glass TTY VT220 Password Hack'],
         orden: ['Orden Web Regular'],
       },
     },

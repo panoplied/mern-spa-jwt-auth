@@ -10,6 +10,13 @@
 }
 
 @font-face {
+  font-family: "Glass TTY VT220 Password Hack";
+  src: url("./fonts/Glass_TTY_VT220_password_hack.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
   font-family: "Orden Web Regular";
   src: url("./fonts/Orden_Regular.woff2") format("woff2");
   font-style: normal;
@@ -62,10 +69,19 @@ button:active {
 }
 
 input {
+  text-align: center;
   background-color: var(--color-black);
   border-width: 2px;
   padding: 0.5em;
   @apply crtWhite;
+}
+input:focus {
+  outline: none;
+  @apply crtGreen;
+  border-color: var(--color-green);
+}
+input[type="password"] {
+  font-family: theme(fontFamily.VT220Pass);
 }
 
 /* CRT-like text styles are global, UI look/feel assumes them everywhere */
