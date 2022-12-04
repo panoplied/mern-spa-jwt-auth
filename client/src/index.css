@@ -25,7 +25,10 @@
     --color-green: theme(colors.green.400);
     --color-amber: theme(colors.amber.400);
     --color-cyan: theme(colors.cyan.400);
-    --color-blue: theme(colors.blue.600);
+
+    --color-button: theme(colors.blue.600);
+    --color-button-hover: theme(colors.violet.600);
+    --color-button-active: theme(colors.violet.500);
 
     font-family: theme(fontFamily.VT220);
     font-size: 20px;
@@ -45,9 +48,16 @@ h1.title {
 }
 
 button {
-  background-color: var(--color-blue);
+  @apply crtWhite;
+  background-color: var(--color-button);
   width: 100%;
   padding: 0.5em;
+}
+button:hover {
+  background-color: var(--color-button-hover);
+}
+button:active {
+  background-color: var(--color-button-active);
 }
 
 input {
