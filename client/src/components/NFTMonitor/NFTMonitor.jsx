@@ -6,13 +6,18 @@ import styles from "./NFTMonitor.module.css";
 
 const NftMonitor = () => {
   const [transfers, setTransfers] = useState([]);
+  const [blockNum, setBlockNum] = useState("");
   const TRANSFERS_UPDATE_RATE = 5000;
 
   useEffect(() => {
     const updateTransfers = async () => {
       try {
         const fetchedTransfers = await fetchTransfers();
-        setTransfers(fetchedTransfers);
+        const latestBlockNum = fetchedTransfers[0].blockNum;
+        if (latestBlockNum != blockNum) {
+          setTransfers(fetchedTransfers);
+          setBlockNum(latestBlockNum);
+        }
       } catch (error) {
         // TODO set transfers to dummy JSON data from file
         // or actually maybe better set initial transfers value to that
