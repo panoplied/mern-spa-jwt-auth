@@ -47,7 +47,7 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
-  const FormFooter = () => {
+  const FormFooter = () => (
     <>
       {mode === "signup" && (
         <>
@@ -68,7 +68,7 @@ const AuthForm = ({ mode }) => {
         </>
       )}
     </>
-  };
+  );
 
   return (
     <Panel className={styles.auth}>
