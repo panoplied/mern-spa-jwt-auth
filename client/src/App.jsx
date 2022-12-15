@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
+// Functional components
 import AuthForm from "./components/AuthForm";
 import UserProfile from "./components/UserProfile";
-import BackgroundVideo from "./components/BackgroundVideo/BackgroundVideo";
-import Scanlines from "./components/Scanlines";
-import NFTMonitor from "./components/NFTMonitor";
+
+// VFX components
+import NFTMonitor from "./components/VFX/NFTMonitor";
+import BackgroundVideo from "./components/VFX/BackgroundVideo/BackgroundVideo";
+import Scanlines from "./components/VFX/Scanlines";
 
 function App() {
   const { user } = useAuthContext();
@@ -18,6 +21,8 @@ function App() {
           <BackgroundVideo />
         </>
       )}
+      <Scanlines />
+      <NFTMonitor />
 
       <BrowserRouter>
         <Routes>
@@ -36,8 +41,6 @@ function App() {
         </Routes>
       </BrowserRouter>
      
-      <Scanlines />
-      <NFTMonitor />
     </>
   );
 }
