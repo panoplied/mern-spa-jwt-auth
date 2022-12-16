@@ -1,7 +1,7 @@
 import { useLogout } from "../../hooks/useLogout";
 
 import Avatar from "boring-avatars";
-import Panel from "../Panel";
+import Panel from "../UI/Panel";
 
 const UserProfile = ({ user }) => {
   const { logout } = useLogout();

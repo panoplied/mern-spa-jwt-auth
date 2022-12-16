@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 import { Link } from "react-router-dom";
-import Panel from "../Panel";
+import Panel from "../UI/Panel";
 
 import styles from "./AuthForm.module.css";
 
