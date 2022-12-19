@@ -9,6 +9,13 @@ const formReducer = (fields, action) => {
       [id]: { value: "", isTouched: false, isValid: true },
     };
   }
+  if (type === "FOCUS") {
+    const id = payload;
+    return {
+      ...fields,
+      [id]: { value: fields[id].value, isTouched: true, isValid: fields[id].isValid },
+    };
+  }
   if (type === "INPUT") {
     const { id, value } = payload;
     return {

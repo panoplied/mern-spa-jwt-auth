@@ -20,9 +20,28 @@ const FormField = (props) => {
     setIsRegistered(true);
   }, [dispatch, id]);
 
+  // When registered in context init with shared form state, else init by default
+  const { value, isTouched, isValid } = isRegistered
+    ? fields[id]
+    : {
+        value: "",
+        isTouched: false,
+        isValid: true,
+      };
+  const error = isRegistered && isTouched && !isValid;
+
+  const focusHandler = () => {
+    dispatch({
+      type: "FOCUS",
+      payload: id
+    });
+  };
+
   const changeHandler = (event) => {
-    dispatch({ type: "INPUT", payload: { id, value: event.target.value } });
-    // TODO add dispatching VALIDATE with debounce
+    dispatch({
+      type: "INPUT",
+      payload: { id, value: event.target.value },
+    });
   };
 
   const blurHandler = (event) => {
@@ -32,16 +51,22 @@ const FormField = (props) => {
     });
   };
 
-  // When registered in context init with shared form state, else init by default
-  const { value, isTouched, isValid } = isRegistered
-    ? fields[id]
-    : {
-        value: "",
-        isTouched: false,
-        isValid: true,
-      };
-  
-  const error = isRegistered && isTouched && !isValid;
+  // Instant validation - every `debounceRate` milliseconda dispatch `VALIDATE` action
+  // if the field is touched and being edited by the user
+  const debounceRate = 1000;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isRegistered && isTouched && value) {
+        dispatch({
+          type: "VALIDATE",
+          payload: { id, value: fields[id].value, validator },
+        });
+      }
+    }, debounceRate);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isRegistered, isTouched, value, dispatch, fields, id, validator]);
 
   return (
     <div>
@@ -52,6 +77,7 @@ const FormField = (props) => {
         name={name}
         required={required}
         value={value}
+        onFocus={focusHandler}
         onChange={changeHandler}
         onBlur={blurHandler}
       />
