@@ -7,6 +7,7 @@ const FormField = (props) => {
     type = "text",
     label = id,
     name = id,
+    placeholder,
     required,
     validator = () => true, // if no validator provided, the field is always valid
   } = props;
@@ -33,7 +34,7 @@ const FormField = (props) => {
   const focusHandler = () => {
     dispatch({
       type: "FOCUS",
-      payload: id
+      payload: id,
     });
   };
 
@@ -56,7 +57,7 @@ const FormField = (props) => {
   const debounceRate = 1000;
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (isRegistered && isTouched && value) {
+      if (isRegistered && isTouched) {
         dispatch({
           type: "VALIDATE",
           payload: { id, value: fields[id].value, validator },
@@ -66,23 +67,26 @@ const FormField = (props) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [isRegistered, isTouched, value, dispatch, fields, id, validator]);
+  }, [isRegistered, isTouched, dispatch, fields, id, validator]);
+
+  const classes = isValid ? "form-field" : "form-field invalid";
 
   return (
-    <div>
+    <div className={classes}>
       <label htmlFor={id}>{label}</label>
       <input
         id={id}
         type={type}
         name={name}
         required={required}
+        placeholder={placeholder}
         value={value}
         onFocus={focusHandler}
         onChange={changeHandler}
         onBlur={blurHandler}
       />
       {/* TODO validation error handling */}
-      {error && <span>{id} error here</span>}
+      {error && <span>{id} hint here</span>}
     </div>
   );
 };

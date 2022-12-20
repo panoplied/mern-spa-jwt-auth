@@ -4,7 +4,6 @@ import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 import { Form, FormField, FormSubmit } from "../UI/Form";
 import Panel from "../UI/Panel";
-
 import styles from "./AuthForm.module.css";
 
 const AuthForm = ({ mode }) => {
@@ -13,11 +12,7 @@ const AuthForm = ({ mode }) => {
   const passwordId = "password";
 
   const { login, isPending: loginIsPending, error: loginError } = useLogin();
-  const {
-    signup,
-    isPending: signupIsPending,
-    error: signupError,
-  } = useSignup();
+  const { signup, isPending: signupIsPending, error: signupError } = useSignup();
 
   const submitHandler = async (form) => {
     const email = form[emailId].value;
@@ -36,7 +31,7 @@ const AuthForm = ({ mode }) => {
   };
 
   const passwordValidator = (password) => {
-    return password.trim() !== "";
+    return password.length > 0;
   };
 
   const InitialMode = () => (
@@ -96,12 +91,14 @@ const AuthForm = ({ mode }) => {
               id={emailId}
               type="email"
               required
+              placeholder="Enter your email"
               validator={emailValidator}
             />
             <FormField
               id={passwordId}
-              type="email"
+              type="password"
               required
+              placeholder="Enter your password"
               // Don't validate password on login
               validator={mode === "signup" ? passwordValidator : () => true}
             />
