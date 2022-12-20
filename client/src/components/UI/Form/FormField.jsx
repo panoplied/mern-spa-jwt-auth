@@ -9,6 +9,7 @@ const FormField = (props) => {
     name = id,
     placeholder,
     required = false,
+    hint,
     validator = () => true, // if no validator provided, the field is always valid
   } = props;
 
@@ -85,8 +86,7 @@ const FormField = (props) => {
         onChange={changeHandler}
         onBlur={blurHandler}
       />
-      {/* TODO validation error handling */}
-      {error && <span>{id} hint here</span>}
+      {error && <span>{hint}</span>}
     </div>
   );
 };
