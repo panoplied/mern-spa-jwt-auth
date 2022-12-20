@@ -8,7 +8,7 @@ const FormField = (props) => {
     label = id,
     name = id,
     placeholder,
-    required,
+    required = false,
     validator = () => true, // if no validator provided, the field is always valid
   } = props;
 
@@ -17,9 +17,9 @@ const FormField = (props) => {
   // Register field in Form context on mount
   const [isRegistered, setIsRegistered] = useState(false);
   useEffect(() => {
-    dispatch({ type: "REGISTER", payload: id });
+    dispatch({ type: "REGISTER", payload: { id, isRequired: required } });
     setIsRegistered(true);
-  }, [dispatch, id]);
+  }, [dispatch, id, required]);
 
   // When registered in context init with shared form state, else init by default
   const { value, isTouched, isValid } = isRegistered
@@ -52,7 +52,7 @@ const FormField = (props) => {
     });
   };
 
-  // Instant validation - every `debounceRate` milliseconda dispatch `VALIDATE` action
+  // Instant validation - every `debounceRate` milliseconds dispatch `VALIDATE` action
   // if the field is touched and being edited by the user
   const debounceRate = 1000;
   useEffect(() => {
