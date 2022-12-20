@@ -1,55 +1,120 @@
 .auth {
   min-width: 280px;
-  text-align: center;
-  position: relative;
   margin: auto;
   display: flex;
   flex-direction: column;
+
+  .initial {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
 }
 
-.initial {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 20px;
-  min-width: 280px;
-}
-
+/* AuthForm panel title */
 .title {
   display: flex;
-  text-align: left;
   align-items: center;
   background-color: var(--color-blue);
 }
-
 .title > :first-child {
   margin-left: 20px;
 }
 .title > :last-child {
-  background-color: var(--color-red);
   margin-left: auto;
 }
 
-.form {
+/* AuthForm panel footer */
+.footer {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* AuthForm general controls */
+.auth button {
+  @apply crtWhite;
+  width: 100%;
+  padding: 0.5em;
+  background-color: theme(colors.red.500);
+}
+.auth button:hover {
+  background-color: theme(colors.green.500);
+}
+.auth button:active {
+  background-color: theme(colors.yellow.400);
+}
+.auth a {
+  @apply crtCyan;
+}
+.auth a:hover {
+  @apply crtLime;
+}
+
+/* Form component */
+.auth form {
+  width: 280px;
   display: flex;
   margin: 0 auto;
   gap: 40px;
   flex-direction: column;
   padding: 30px;
 }
-
 @media (min-width: 360px) {
-  .form {
+  .auth form {
     width: 320px;
   }
 }
 @media (min-width: 480px) {
-  .form {
+  .auth form {
     width: 440px;
   }
 }
 @media (min-width: 720px) {
-  .form {
+  .auth form {
     width: 640px;
   }
+}
+
+/* Form fields */
+.auth label {
+  text-transform: uppercase;
+}
+.auth :global(.form-field) input {
+  @apply crtWhite;
+  width: 100%;
+  background-color: var(--color-black);
+  border-width: 2px;
+  padding: 0.5em;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.auth :global(.form-field) input:focus {
+  @apply crtGreen;
+  outline: none;
+  border-color: var(--color-green);
+}
+.auth :global(.form-field) input::placeholder {
+  @apply crtWhite;
+  opacity: 60%;
+}
+.auth :global(.form-field) input:focus::placeholder {
+  @apply crtGreen;
+  opacity: 20%;
+}
+.auth :global(.form-field) input[type="password"] {
+  font-family: theme(fontFamily.VT220Pass);
+}
+.auth :global(.form-field) span {
+  /* visibility: hidden; */
+  background-color: blueviolet;
+}
+
+/* Form submit */
+.auth :global(.form-submit) button {
+  background-color: var(--color-blue);
+}
+.auth :global(.form-submit) button:disabled {
+  opacity: 30%;
+  cursor: not-allowed;
 }

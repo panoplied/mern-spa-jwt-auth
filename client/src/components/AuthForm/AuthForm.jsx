@@ -7,12 +7,11 @@ import Panel from "../UI/Panel";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = ({ mode }) => {
+  const { login, isPending: loginIsPending, error: loginError } = useLogin();
+  const { signup, isPending: signupIsPending, error: signupError } = useSignup();
   const formId = "auth-form";
   const emailId = "email";
   const passwordId = "password";
-
-  const { login, isPending: loginIsPending, error: loginError } = useLogin();
-  const { signup, isPending: signupIsPending, error: signupError } = useSignup();
 
   const submitHandler = async (form) => {
     const email = form[emailId].value;
@@ -50,34 +49,28 @@ const AuthForm = ({ mode }) => {
     <div className={styles.title}>
       <h1>{formAction}</h1>
       <Link to="/">
-        {/* TODO move style declaration into appropriate CSS */}
-        <button className="bg-red-500">ESC</button>
+        <button>ESC</button>
       </Link>
     </div>
   );
 
   const FormFooter = () => (
-    <>
+    <div className={styles.footer}>
       {mode === "login" && (
         <>
           <p>{loginError}</p>
           <p>Don't have an account?</p>
-          <p className="crtCyan">
-            {/* TODO style link in response to mouse events */}
-            <Link to="/signup">SIGN UP</Link>
-          </p>
+          <Link to="/signup">SIGN UP</Link>
         </>
       )}
       {mode === "signup" && (
         <>
           <p>{signupError}</p>
           <p>Already a user?</p>
-          <p className="crtCyan">
-            <Link to="/login">LOGIN</Link>
-          </p>
+          <Link to="/login">LOGIN</Link>
         </>
       )}
-    </>
+    </div>
   );
 
   return (
@@ -92,6 +85,7 @@ const AuthForm = ({ mode }) => {
               type="email"
               required
               placeholder="Enter your email"
+              hint="Please use valid email"
               validator={emailValidator}
             />
             <FormField
@@ -99,10 +93,10 @@ const AuthForm = ({ mode }) => {
               type="password"
               required
               placeholder="Enter your password"
+              hint="Should be 4 chars min asdfasdfkjas;dlkfj ;alksjd f;aslkdjf "
               // Don't validate password on login
               validator={mode === "signup" ? passwordValidator : () => true}
             />
-            {/* TODO !!! FINISH DISABLED LOGIC, POLISH FormSubmit component (heavy refactoring needed) */}
             <FormSubmit
               form={formId}
               formNoValidate

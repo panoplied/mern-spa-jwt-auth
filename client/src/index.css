@@ -4,21 +4,21 @@
 
 @font-face {
   font-family: "Glass TTY VT220";
-  src: url("./fonts/Glass_TTY_VT220.ttf") format("truetype");
+  src: url("./assets/fonts/Glass_TTY_VT220.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Glass TTY VT220 Password Hack";
-  src: url("./fonts/Glass_TTY_VT220_password_hack.woff2") format("woff2");
+  src: url("./assets/fonts/Glass_TTY_VT220_password_hack.woff2") format("woff2");
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Orden Web Regular";
-  src: url("./fonts/Orden_Regular.woff2") format("woff2");
+  src: url("./assets/fonts/Orden_Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: normal;
 }
@@ -34,16 +34,55 @@
     --color-cyan: theme(colors.cyan.400);
     --color-blue: theme(colors.blue.600);
 
-    --color-button: theme(colors.blue.600);
-    --color-button-hover: theme(colors.green.500);
-    --color-button-active: theme(colors.yellow.400);
-
     font-family: theme(fontFamily.VT220);
     font-size: 20px;
     line-height: 30px;
-
     background-color: var(--color-black);
     @apply crtWhite;
+  }
+
+  /* CRT emulated colors for text styles */
+  .crtLime {
+    color: var(--color-lime);
+    text-shadow:
+      0 0 1px var(--color-lime),
+      0 0 2px var(--color-lime),
+      0 0 4px var(--color-lime);
+  }
+  .crtRed {
+    color: var(--color-red);
+    text-shadow:
+      0 0 1px var(--color-red),
+      0 0 2px var(--color-red),
+      0 0 4px var(--color-red);
+  }
+  .crtGreen {
+    color: var(--color-green);
+    text-shadow:
+      0 0 1px var(--color-green),
+      0 0 2px var(--color-green),
+      0 0 4px var(--color-green);
+  }
+  .crtAmber {
+    color: var(--color-amber);
+    text-shadow:
+      0 0 1px var(--color-amber),
+      0 0 2px var(--color-amber),
+      0 0 4px var(--color-amber);
+  }
+  .crtCyan {
+    color: var(--color-cyan);
+    text-shadow:
+      0 0 1px var(--color-cyan),
+      0 0 2px var(--color-cyan),
+      0 0 4px var(--color-cyan);
+  }
+  .crtWhite {
+    color: var(--color-white);
+    text-shadow:
+      0 0 1px var(--color-white),
+      0 0 2px var(--color-white),
+      0 0 4px var(--color-white);
   }
 }
 
@@ -54,6 +93,7 @@
   text-align: center;
   text-shadow: none;
 }
+
 @media (min-width: 360px) {
   .title {
     font-size: calc(3em + 0.5vw);
@@ -73,96 +113,4 @@
   .title {
     margin-bottom: 1.2em;
   }
-}
-
-button,
-button[type="submit"] {
-  @apply crtWhite;
-  background-color: var(--color-button);
-  width: 100%;
-  padding: 0.5em;
-  letter-spacing: 2px;
-}
-button:disabled,
-button:disabled:hover {
-  background-color: var(--color-button);
-  opacity: 50%;
-  cursor: not-allowed;
-}
-
-button:hover {
-  background-color: var(--color-button-hover);
-}
-button:active {
-  background-color: var(--color-button-active);
-}
-
-input {
-  @apply crtWhite;
-  width: 100%;
-  background-color: var(--color-black);
-  border-width: 2px;
-  padding: 0.5em;
-  text-align: center;
-  letter-spacing: 2px;
-}
-input:focus {
-  @apply crtGreen;
-  outline: none;
-  border-color: var(--color-green);
-}
-input::placeholder {
-  @apply crtWhite;
-  opacity: 80%;
-}
-input:focus::placeholder {
-  @apply crtGreen;
-  opacity: 50%;
-}
-input[type="password"] {
-  font-family: theme(fontFamily.VT220Pass);
-}
-
-/* CRT-like text styles are global, UI look/feel assumes them everywhere */
-.crtLime {
-  color: var(--color-lime);
-  text-shadow:
-    0 0 1px var(--color-lime),
-    0 0 2px var(--color-lime),
-    0 0 4px var(--color-lime);
-}
-.crtRed {
-  color: var(--color-red);
-  text-shadow:
-    0 0 1px var(--color-red),
-    0 0 2px var(--color-red),
-    0 0 4px var(--color-red);
-}
-.crtGreen {
-  color: var(--color-green);
-  text-shadow:
-    0 0 1px var(--color-green),
-    0 0 2px var(--color-green),
-    0 0 4px var(--color-green);
-}
-.crtAmber {
-  color: var(--color-amber);
-  text-shadow:
-    0 0 1px var(--color-amber),
-    0 0 2px var(--color-amber),
-    0 0 4px var(--color-amber);
-}
-.crtCyan {
-  color: var(--color-cyan);
-  text-shadow:
-    0 0 1px var(--color-cyan),
-    0 0 2px var(--color-cyan),
-    0 0 4px var(--color-cyan);
-}
-.crtWhite {
-  color: var(--color-white);
-  text-shadow:
-    0 0 1px var(--color-white),
-    0 0 2px var(--color-white),
-    0 0 4px var(--color-white);
 }

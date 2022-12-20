@@ -40,9 +40,9 @@ services:
     restart: unless-stopped
     env_file: ./.env
     environment:
-      - REACT_APP_API_HOST=http://localhost
-      - REACT_APP_API_PORT=${API_HOST_PORT:-8080}
-      - REACT_APP_API_PATH=api
+      - VITE_APP_API_HOST=http://localhost
+      - VITE_APP_API_PORT=${API_HOST_PORT:-8080}
+      - VITE_APP_API_PATH=api
     stdin_open: true
     tty: true
     ports:

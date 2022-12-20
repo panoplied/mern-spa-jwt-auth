@@ -22,14 +22,16 @@ const FormSubmit = (props) => {
   }, [disabled, disabledOnInvalid, formIsValid]);
 
   return (
-    <button
-      type={type}
-      form={form}
-      formNoValidate={formNoValidate}
-      disabled={isDisabled}
-    >
-      {props.children}
-    </button>
+    <div className="form-submit">
+      <button
+        type={type}
+        form={form}
+        formNoValidate={formNoValidate}
+        disabled={isDisabled}
+      >
+        {props.children}
+      </button>
+    </div>
   );
 };
 

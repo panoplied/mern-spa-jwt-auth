@@ -70,10 +70,8 @@ const FormField = (props) => {
     };
   }, [isRegistered, isTouched, dispatch, fields, id, validator]);
 
-  const classes = isValid ? "form-field" : "form-field invalid";
-
   return (
-    <div className={classes}>
+    <div className={isValid ? "form-field" : "form-field invalid"}>
       <label htmlFor={id}>{label}</label>
       <input
         id={id}

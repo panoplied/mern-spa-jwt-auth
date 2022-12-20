@@ -5,7 +5,7 @@ const userRoutes = require("./routes/user");
 const nftRoutes = require("./routes/nft");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*"}));
 
 const API_PORT = process.env.API_PORT;
 

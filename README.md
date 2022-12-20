@@ -1,6 +1,6 @@
 # Auth SPA example
 
-Current dev run routine
+Dev run routine
 
 ## Run fullstack (UI, API and Mongo at once) in containers with Docker Compose:
 
@@ -29,7 +29,7 @@ Source code changes are not in Docker volume, so not reflected inside the API co
 
 ```
 cd client
-npm run start
+npm run dev 
 ```
 
 This will launch React baked frontend on http://localhost:3000 by default.
