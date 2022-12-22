@@ -1,120 +1,122 @@
 .auth {
   min-width: 280px;
-  margin: auto;
   display: flex;
   flex-direction: column;
+  margin: auto;
+  margin-bottom: 16em;
 
+  /* Initial mode (when no login/signup choosen) */
   .initial {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     gap: 20px;
+    padding: 20px;
   }
-}
 
-/* AuthForm panel title */
-.title {
-  display: flex;
-  align-items: center;
-  background-color: var(--color-blue);
-}
-.title > :first-child {
-  margin-left: 20px;
-}
-.title > :last-child {
-  margin-left: auto;
-}
-
-/* AuthForm panel footer */
-.footer {
-  text-align: center;
-  padding-bottom: 20px;
-}
-
-/* AuthForm general controls */
-.auth button {
-  @apply crtWhite;
-  width: 100%;
-  padding: 0.5em;
-  background-color: theme(colors.red.500);
-}
-.auth button:hover {
-  background-color: theme(colors.green.500);
-}
-.auth button:active {
-  background-color: theme(colors.yellow.400);
-}
-.auth a {
-  @apply crtCyan;
-}
-.auth a:hover {
-  @apply crtLime;
-}
-
-/* Form component */
-.auth form {
-  width: 280px;
-  display: flex;
-  margin: 0 auto;
-  gap: 40px;
-  flex-direction: column;
-  padding: 30px;
-}
-@media (min-width: 360px) {
-  .auth form {
-    width: 320px;
+  /* Panel/window title */
+  .title {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-blue);
   }
-}
-@media (min-width: 480px) {
-  .auth form {
-    width: 440px;
+  .title > :first-child {
+    margin-left: 20px;
   }
-}
-@media (min-width: 720px) {
-  .auth form {
-    width: 640px;
+  .title > :last-child {
+    margin-left: auto;
   }
-}
 
-/* Form fields */
-.auth label {
-  text-transform: uppercase;
-}
-.auth :global(.form-field) input {
-  @apply crtWhite;
-  width: 100%;
-  background-color: var(--color-black);
-  border-width: 2px;
-  padding: 0.5em;
-  text-align: center;
-  letter-spacing: 2px;
-}
-.auth :global(.form-field) input:focus {
-  @apply crtGreen;
-  outline: none;
-  border-color: var(--color-green);
-}
-.auth :global(.form-field) input::placeholder {
-  @apply crtWhite;
-  opacity: 60%;
-}
-.auth :global(.form-field) input:focus::placeholder {
-  @apply crtGreen;
-  opacity: 20%;
-}
-.auth :global(.form-field) input[type="password"] {
-  font-family: theme(fontFamily.VT220Pass);
-}
-.auth :global(.form-field) span {
-  /* visibility: hidden; */
-  background-color: blueviolet;
-}
+  /* Panel/window footer */
+  .footer {
+    text-align: center;
+    padding-bottom: 20px;
+  }
 
-/* Form submit */
-.auth :global(.form-submit) button {
-  background-color: var(--color-blue);
-}
-.auth :global(.form-submit) button:disabled {
-  opacity: 30%;
-  cursor: not-allowed;
+  /* Custom auth controls */
+  button {
+    @apply crtWhite;
+    width: 100%;
+    padding: 0.5em;
+    background-color: theme(colors.red.500);
+  }
+  button:hover {
+    background-color: theme(colors.green.500);
+  }
+  button:active {
+    background-color: theme(colors.yellow.400);
+  }
+  a {
+    @apply crtCyan;
+  }
+  a:hover {
+    @apply crtLime;
+  }
+
+  /* External styling of reusable Form component */
+  form {
+    width: 280px;
+    @media (min-width: 360px) {
+      width: 320px;
+    }
+    @media (min-width: 480px) {
+      width: 440px;
+    }
+    @media (min-width: 720px) {
+      width: 640px;
+    }
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 0 auto;
+    padding: 30px;
+
+    /* Form Fields */
+    :global(.form-field) {
+      label {
+        text-transform: uppercase;
+      }
+
+      input {
+        width: 100%;
+        background-color: var(--color-black);
+        border-width: 2px;
+        padding: 0.5em;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      input:focus {
+        @apply crtGreen;
+        outline: none;
+        border-color: var(--color-green);
+      }
+      input::placeholder {
+        @apply crtWhite;
+        opacity: 60%;
+      }
+      input:focus::placeholder {
+        @apply crtGreen;
+        opacity: 20%;
+      }
+      /* Use custom hacked webfont for more fancy `*` pass bullets */
+      input[type="password"] {
+        font-family: theme(fontFamily.VT220Pass);
+      }
+
+      span {
+        /* visibility: hidden; */
+        background-color: blueviolet;
+      }
+    }
+
+    /* Form Submit */
+    :global(.form-submit) {
+      button {
+        background-color: var(--color-blue);
+      }
+      button:disabled {
+        opacity: 30%;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
