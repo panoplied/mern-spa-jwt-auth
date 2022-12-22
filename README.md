@@ -3,6 +3,7 @@
 ## Run fullstack build with Docker Compose:
 
 ```
+cp .env.template .env
 docker-compose up
 ```
 
@@ -61,6 +62,7 @@ After running `docker-compose up` the local version of the API will have access 
 ```
 npm install -g nodemon
 cd server
+cp ./env.template ./env
 nodemon
 ```
 
@@ -72,6 +74,7 @@ This will expose the API endpoints on `API_PORT` from `./server/.env`, which is 
 
 ```
 cd client
+cp ./env.template ./env
 npm run dev
 ```
 
