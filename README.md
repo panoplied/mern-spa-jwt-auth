@@ -4,6 +4,9 @@
 
 ```
 cp .env.template .env
+```
+Edit copied `.env` file to fill in `ALCHEMY_API_KEY` for Ethereum Mainnet (get on [Alchemy](https://alchemy.com)) and `JWT_PRIVATE_KEY` (arbitrary value, can even leave as it is for testing, but **should be properly secured secret word/phrase for production use**).
+```
 docker-compose up
 ```
 
@@ -60,15 +63,18 @@ For the ease of endpoint testing the API is exposed on `API_HOST_PORT` stated in
 After running `docker-compose up` the local version of the API will have access to the exposed MongoDB port from Docker and can be launched locally like this:
 
 ```
-npm install -g nodemon
 cd server
 cp ./env.template ./env
+```
+Edit copied `.env` file to fill in `ALCHEMY_API_KEY` for Ethereum Mainnet (get on [Alchemy](https://alchemy.com)) and `JWT_PRIVATE_KEY` (arbitrary value, can even leave as it is for testing, but **should be properly secured secret word/phrase for production use**). Then install `nodemon` and launch it from the `server` directory:
+```
+npm install -g nodemon
 nodemon
 ```
 
 This will expose the API endpoints on `API_PORT` from `./server/.env`, which is `4000` by default: http://localhost:4000
 
-**Source code changes are not synced with Docker volume, so not reflected inside the API container**
+**Source code changes are not synced with Docker volume, so not reflected inside the API container.**
 
 ## Run dev version of the Frontend
 
