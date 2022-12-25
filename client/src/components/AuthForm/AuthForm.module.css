@@ -68,43 +68,79 @@
     flex-direction: column;
     gap: 40px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 40px 20px;
 
     /* Form Fields */
     :global(.form-field) {
-      label {
-        text-transform: uppercase;
-      }
+      position: relative;
 
       input {
+        @apply crtWhite;
         width: 100%;
         background-color: var(--color-black);
         border-width: 2px;
         padding: 0.5em;
-        text-align: center;
         letter-spacing: 1px;
-      }
-      input:focus {
-        @apply crtGreen;
-        outline: none;
-        border-color: var(--color-green);
-      }
-      input::placeholder {
-        @apply crtWhite;
-        opacity: 60%;
-      }
-      input:focus::placeholder {
-        @apply crtGreen;
-        opacity: 20%;
-      }
-      /* Use custom hacked webfont for more fancy `*` pass bullets */
-      input[type="password"] {
-        font-family: theme(fontFamily.VT220Pass);
+        &:focus {
+          @apply crtCyan;
+          outline: none;
+          border-color: var(--color-cyan);
+        }
+        &::placeholder {
+          @apply crtWhite;
+          opacity: 60%;
+        }
+        &[type="password"] {
+          font-family: theme(fontFamily.VT220Pass);
+        }
       }
 
-      span {
-        /* visibility: hidden; */
-        background-color: blueviolet;
+      label {
+        position: absolute;
+        left: 0;
+        top: -30px;
+        text-transform: uppercase;
+        visibility: hidden;
+      }
+      input:not(:placeholder-shown) + label {
+        opacity: 60%;
+        visibility: visible;
+      }
+
+      :global(.hint) {
+        @apply crtWhite;
+        padding: 0 10px;
+        min-height: 30px;
+        /* background-color: var(--color-red); */
+        visibility: hidden;
+      }
+
+      :global(.capslock-indicator) {
+        @apply crtAmber;
+        position: absolute;
+        top: 12px;
+        right: 10px;
+      }
+    }
+
+    /* Invalid FormFields */
+    :global(.form-field.invalid) {
+      input:not(:focus) {
+        @apply crtRed;
+        border-color: var(--color-red);
+
+        &::placeholder {
+          @apply crtRed;
+        }
+      }
+
+      input:not(:focus) + label {
+        @apply crtRed;
+      }
+
+      :global(.hint) {
+        /* @apply crtRed; */
+        visibility: visible;
       }
     }
 
