@@ -88,6 +88,7 @@ const FormField = (props) => {
       />
       <label htmlFor={id}>{label}</label>
       <div className="hint">{hint}</div>
+      {props.optionalElements}
     </div>
   );
 };
