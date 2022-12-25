@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { FormContext } from "./Form";
 
 const FormField = (props) => {
@@ -22,7 +22,7 @@ const FormField = (props) => {
     setIsRegistered(true);
   }, [dispatch, id, required]);
 
-  // When registered in context init with shared form state, else init by default
+  // When registered in context, init with shared form state, else init with defaults
   const { value, isTouched, isValid } = isRegistered
     ? fields[id]
     : {
@@ -30,7 +30,6 @@ const FormField = (props) => {
         isTouched: false,
         isValid: true,
       };
-  const error = isRegistered && isTouched && !isValid;
 
   const focusHandler = () => {
     dispatch({
@@ -46,33 +45,36 @@ const FormField = (props) => {
     });
   };
 
-  const blurHandler = (event) => {
-    dispatch({
-      type: "VALIDATE",
-      payload: { id, value: event.target.value, validator },
-    });
+  const blurHandler = async () => {
+    await validate(value);
   };
 
-  // Instant validation - every `debounceRate` milliseconds dispatch `VALIDATE` action
-  // if the field is touched and being edited by the user
-  const debounceRate = 1000;
+  const validate = useCallback(
+    async (value) => {
+      dispatch({
+        type: "VALIDATE",
+        payload: { id, value, isValid: await validator(value) },
+      });
+    },
+    [value]
+  );
+
+  // Instant validation on input: if the field is being edited,
+  // then validate every `debounceRate` milliseconds
+  const debounceRate = 500;
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isRegistered && isTouched) {
-        dispatch({
-          type: "VALIDATE",
-          payload: { id, value: fields[id].value, validator },
-        });
+        validate(value);
       }
     }, debounceRate);
     return () => {
       clearTimeout(timer);
     };
-  }, [isRegistered, isTouched, dispatch, fields, id, validator]);
+  }, [isRegistered, isTouched, dispatch, id, value, validate]);
 
   return (
     <div className={isValid ? "form-field" : "form-field invalid"}>
-      <label htmlFor={id}>{label}</label>
       <input
         id={id}
         type={type}
@@ -84,7 +86,8 @@ const FormField = (props) => {
         onChange={changeHandler}
         onBlur={blurHandler}
       />
-      {error && <span>{hint}</span>}
+      <label htmlFor={id}>{label}</label>
+      <div className="hint">{hint}</div>
     </div>
   );
 };

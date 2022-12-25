@@ -24,10 +24,10 @@ const formReducer = (fields, action) => {
     };
   }
   if (type === "VALIDATE") {
-    const { id, value, validator } = payload;
+    const { id, value, isValid } = payload;
     return {
       ...fields,
-      [id]: { ...fields[id], value, isValid: validator(value) },
+      [id]: { ...fields[id], value, isValid },
     };
   }
   return fields;
