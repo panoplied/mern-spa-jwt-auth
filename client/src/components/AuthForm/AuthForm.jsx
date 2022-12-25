@@ -1,36 +1,65 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import validator from "validator";
 
 import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 import { Form, FormField, FormSubmit } from "../UI/Form";
 import Panel from "../UI/Panel";
+import PasswordHint from "./PasswordHint";
+import CapsLockIndicator from "../UI/CapsLockIndicator";
 import styles from "./AuthForm.module.css";
 
+const PASS_REQUIREMENTS = {
+  minLength: 6,
+  minLowercase: 1,
+  minUppercase: 1,
+  minNumbers: 1,
+  minSymbols: 0,
+};
+
 const AuthForm = ({ mode }) => {
+  const FORM_ID = "auth-form";
+  const EMAIL_ID = "email";
+  const PASSWORD_ID = "password";
+
+  const [emailHint, setEmailHint] = useState("");
+  const [passHint, setPassHint] = useState("");
+
+  const emailValidator = async (email) => {
+    if (await validator.isEmail(email)) {
+      setEmailHint("");
+      return true;
+    } else {
+      setEmailHint("Please use a valid email");
+      return false;
+    }
+  };
+
+  const passwordValidator = async (password) => {
+    if (await validator.isStrongPassword(password, PASS_REQUIREMENTS)) {
+      setPassHint("");
+      return true;
+    } else {
+      setPassHint(<PasswordHint pwd={password} pwdReqs={PASS_REQUIREMENTS} />);
+      return false;
+    }
+  };
+
   const { login, isPending: loginIsPending, error: loginError } = useLogin();
   const { signup, isPending: signupIsPending, error: signupError } = useSignup();
-  const formId = "auth-form";
-  const emailId = "email";
-  const passwordId = "password";
 
   const submitHandler = async (form) => {
-    const email = form[emailId].value;
-    const password = form[passwordId].value;
+    const email = form[EMAIL_ID].value;
+    const password = form[PASSWORD_ID].value;
     if (mode === "login") {
       await login(email, password);
     }
     if (mode === "signup") {
       await signup(email, password);
     }
+    // TODO remove debug console.log
     console.log("SUBMITTING FORM:", email, password);
-  };
-
-  const emailValidator = (email) => {
-    return email.includes("@");
-  };
-
-  const passwordValidator = (password) => {
-    return password.length > 0;
   };
 
   const InitialMode = () => (
@@ -79,26 +108,26 @@ const AuthForm = ({ mode }) => {
       {mode !== "initial" && (
         <>
           <FormTitle />
-          <Form id={formId} onSubmit={submitHandler}>
+          <Form id={FORM_ID} onSubmit={submitHandler}>
             <FormField
-              id={emailId}
+              id={EMAIL_ID}
               type="email"
               required
-              placeholder="Enter your email"
-              hint="Please use valid email"
+              placeholder="EMAIL"
               validator={emailValidator}
+              hint={emailHint}
             />
             <FormField
-              id={passwordId}
+              id={PASSWORD_ID}
               type="password"
               required
-              placeholder="Enter your password"
-              hint="Should be 4 chars min asdfasdfkjas;dlkfj ;alksjd f;aslkdjf "
-              // Don't validate password on login
-              validator={mode === "signup" ? passwordValidator : () => true}
+              placeholder="PASSWORD"
+              validator={mode === "signup" ? passwordValidator : () => true} // validate pass only for signup
+              hint={passHint}
+              optionalElements={<CapsLockIndicator />}
             />
             <FormSubmit
-              form={formId}
+              form={FORM_ID}
               formNoValidate
               disabled={loginIsPending || signupIsPending}
               disabledOnInvalid={true}
