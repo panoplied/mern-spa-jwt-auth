@@ -13,14 +13,34 @@ import Scanlines from "./components/VFX/Scanlines";
 function App() {
   const { user } = useAuthContext();
 
+  const title = "AEThERNA";
+
+  const Landing = () => {
+    return !user ? (
+      <>
+        <h1 className="title">{title}</h1>
+        <AuthForm mode="initial" />
+      </>
+    ) : (
+      <>
+        <h1 className="title small">{title}</h1>
+        <UserProfile user={user} />
+      </>
+    );
+  };
+
+  const Auth = ({ mode }) => {
+    return (
+      <>
+        <h1 className="title small">{title}</h1>
+        <AuthForm mode={mode} />
+      </>
+    );
+  };
+
   return (
     <>
-      {!user && (
-        <>
-          <h1 className="title">AEThERNA</h1>
-          <BackgroundVideo />
-        </>
-      )}
+      {!user && <BackgroundVideo />}
       <Scanlines />
       <NFTMonitor />
 
@@ -28,19 +48,18 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={!user ? <AuthForm mode="initial" /> : <UserProfile user={user} />}
+            element={<Landing />}
           />
           <Route
             path="/login"
-            element={!user ? <AuthForm mode="login" /> : <Navigate to="/" />}
+            element={!user ? <Auth mode="login" /> : <Navigate to="/" />}
           />
           <Route
             path="/signup"
-            element={!user ? <AuthForm mode="signup" /> : <Navigate to="/" />}
+            element={!user ? <Auth mode="signup" /> : <Navigate to="/" />}
           />
         </Routes>
       </BrowserRouter>
-     
     </>
   );
 }
