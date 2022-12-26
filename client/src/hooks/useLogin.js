@@ -31,5 +31,5 @@ export const useLogin = () => {
     setIsPending(false);
   };
 
-  return { login, isPending, error };
+  return { login, isPending, error, setError };
 };

@@ -1,13 +1,15 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import validator from "validator";
 
 import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 import { Form, FormField, FormSubmit } from "../UI/Form";
-import Panel from "../UI/Panel";
+
 import PasswordHint from "./PasswordHint";
 import CapsLockIndicator from "../UI/CapsLockIndicator";
+import Panel from "../UI/Panel";
+
 import styles from "./AuthForm.module.css";
 
 const PASS_REQUIREMENTS = {
@@ -58,8 +60,24 @@ const AuthForm = ({ mode }) => {
     [mode]
   );
 
-  const { login, isPending: loginIsPending, error: loginError } = useLogin();
-  const { signup, isPending: signupIsPending, error: signupError } = useSignup();
+  const {
+    login,
+    isPending: loginIsPending,
+    error: loginError,
+    setError: setLoginError,
+  } = useLogin();
+
+  const {
+    signup,
+    isPending: signupIsPending,
+    error: signupError,
+    setError: setSignupError,
+  } = useSignup();
+
+  useEffect(() => {
+    setLoginError("");
+    setSignupError("");
+  }, [mode]);
 
   const submitHandler = async (form) => {
     const email = form[EMAIL_ID].value;
@@ -83,10 +101,9 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
-  const formAction = mode.toUpperCase();
   const FormTitle = () => (
     <div className={styles.title}>
-      <h1>{formAction}</h1>
+      <h1>{mode.toUpperCase()}</h1>
       <Link to="/">
         <button>ESC</button>
       </Link>
@@ -97,14 +114,14 @@ const AuthForm = ({ mode }) => {
     <div className={styles.footer}>
       {mode === "login" && (
         <>
-          <p>{loginError}</p>
+          {loginError && <p className={styles["server-error"]}>{loginError}</p>}
           <p>Don't have an account?</p>
           <Link to="/signup">SIGN UP</Link>
         </>
       )}
       {mode === "signup" && (
         <>
-          <p>{signupError}</p>
+          {signupError && <p className={styles["server-error"]}>{signupError}</p>}
           <p>Already a user?</p>
           <Link to="/login">LOGIN</Link>
         </>
@@ -112,9 +129,7 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
-  const Reset = () => {
-    return <>{"><"}</>;
-  };
+  const Reset = () => <>{"><"}</>;
 
   return (
     <Panel className={styles.auth}>
@@ -148,7 +163,7 @@ const AuthForm = ({ mode }) => {
               disabled={loginIsPending || signupIsPending}
               disabledOnInvalid={true}
             >
-              {formAction}
+              {(loginIsPending || signupIsPending) ? "PENDING..." : mode.toUpperCase()}
             </FormSubmit>
           </Form>
           <FormFooter />

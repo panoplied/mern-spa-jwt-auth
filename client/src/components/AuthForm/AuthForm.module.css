@@ -44,7 +44,12 @@
       background-color: theme(colors.yellow.400);
     }
   }
-
+  .server-error {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: var(--color-red);
+    text-transform: uppercase;
+  }
   a {
     @apply crt-cyan;
     &:hover {
