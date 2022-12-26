@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState, useCallback, useRef } from "react";
 import { FormContext } from "./Form";
 
 const FormField = (props) => {
@@ -75,6 +75,7 @@ const FormField = (props) => {
     };
   }, [isRegistered, isTouched, dispatch, id, value, validate]);
 
+  const inputRef = useRef(null);
   const resetHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -82,6 +83,7 @@ const FormField = (props) => {
       type: "RESET",
       payload: id,
     });
+    inputRef.current.focus();
   };
 
   let styles = "form-field";
@@ -104,6 +106,7 @@ const FormField = (props) => {
         onFocus={focusHandler}
         onChange={changeHandler}
         onBlur={blurHandler}
+        ref={inputRef}
       />
       <label htmlFor={id}>{label}</label>
       <div className="reset" onClick={resetHandler}>
