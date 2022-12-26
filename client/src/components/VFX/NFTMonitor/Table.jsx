@@ -6,13 +6,13 @@ const ETH_DEAD_ADDR = "0X000000000000000000000000000000000000DEAD";
 
 const Table = ({ transfers }) => {
   const transferStyles = {
-    erc: "crtCyan",
-    title: "crtAmber",
-    mint: "crtLime",
-    burn: "crtRed",
-    saleTransfer: "crtGreen",
-    from: "crtCyan",
-    to: "crtCyan",
+    erc: "crt-cyan",
+    title: "crt-amber",
+    mint: " crt-lime",
+    burn: "crt-red",
+    saleTransfer: "crt-green",
+    from: "crt-cyan",
+    to: "crt-cyan",
   };
 
   const formattedTransfers = transfers

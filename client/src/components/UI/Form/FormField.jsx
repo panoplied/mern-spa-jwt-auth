@@ -73,8 +73,16 @@ const FormField = (props) => {
     };
   }, [isRegistered, isTouched, dispatch, id, value, validate]);
 
+  let styles = "form-field";
+  if (isValid && isTouched) {
+    styles = "form-field valid";
+  }
+  if (!isValid && isTouched) {
+    styles = "form-field invalid";
+  }
+
   return (
-    <div className={isValid ? "form-field" : "form-field invalid"}>
+    <div className={styles}>
       <input
         id={id}
         type={type}

@@ -33,51 +33,50 @@
     --color-amber: theme(colors.amber.400);
     --color-cyan: theme(colors.cyan.400);
     --color-blue: theme(colors.blue.600);
-
     font-family: theme(fontFamily.VT220);
     font-size: 20px;
     line-height: 30px;
     background-color: var(--color-black);
-    @apply crtWhite;
+    @apply crt-white;
   }
 
   /* CRT emulated colors for text styles */
-  .crtLime {
+  .crt-lime {
     color: var(--color-lime);
     text-shadow:
       0 0 1px var(--color-lime),
       0 0 2px var(--color-lime),
       0 0 4px var(--color-lime);
   }
-  .crtRed {
+  .crt-red {
     color: var(--color-red);
     text-shadow:
       0 0 1px var(--color-red),
       0 0 2px var(--color-red),
       0 0 4px var(--color-red);
   }
-  .crtGreen {
+  .crt-green {
     color: var(--color-green);
     text-shadow:
       0 0 1px var(--color-green),
       0 0 2px var(--color-green),
       0 0 4px var(--color-green);
   }
-  .crtAmber {
+  .crt-amber {
     color: var(--color-amber);
     text-shadow:
       0 0 1px var(--color-amber),
       0 0 2px var(--color-amber),
       0 0 4px var(--color-amber);
   }
-  .crtCyan {
+  .crt-cyan {
     color: var(--color-cyan);
     text-shadow:
       0 0 1px var(--color-cyan),
       0 0 2px var(--color-cyan),
       0 0 4px var(--color-cyan);
   }
-  .crtWhite {
+  .crt-white {
     color: var(--color-white);
     text-shadow:
       0 0 1px var(--color-white),
@@ -92,6 +91,10 @@
   font-size: 3em;
   text-align: center;
   text-shadow: none;
+  &.small {
+    transform: scale(50%);
+    margin: calc(2rem + 2vh) auto;
+  }
 }
 
 @media (min-width: 360px) {

@@ -1,9 +1,8 @@
 .auth {
-  min-width: 280px;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  margin-bottom: 16em;
+  min-width: 280px;
+  margin: 2em auto;
 
   /* Initial mode (when no login/signup choosen) */
   .initial {
@@ -18,12 +17,12 @@
     display: flex;
     align-items: center;
     background-color: var(--color-blue);
-  }
-  .title > :first-child {
-    margin-left: 20px;
-  }
-  .title > :last-child {
-    margin-left: auto;
+    & > :first-child {
+      margin-left: 20px;
+    }
+    & > :last-child {
+      margin-left: auto;
+    }
   }
 
   /* Panel/window footer */
@@ -34,22 +33,23 @@
 
   /* Custom auth controls */
   button {
-    @apply crtWhite;
+    @apply crt-white;
     width: 100%;
     padding: 0.5em;
     background-color: theme(colors.red.500);
+    &:hover {
+      background-color: theme(colors.green.500);
+    }
+    &:active {
+      background-color: theme(colors.yellow.400);
+    }
   }
-  button:hover {
-    background-color: theme(colors.green.500);
-  }
-  button:active {
-    background-color: theme(colors.yellow.400);
-  }
+
   a {
-    @apply crtCyan;
-  }
-  a:hover {
-    @apply crtLime;
+    @apply crt-cyan;
+    &:hover {
+      @apply crt-lime;
+    }
   }
 
   /* External styling of reusable Form component */
@@ -75,23 +75,27 @@
       position: relative;
 
       input {
-        @apply crtWhite;
+        @apply crt-white;
         width: 100%;
         background-color: var(--color-black);
         border-width: 2px;
         padding: 0.5em;
         letter-spacing: 1px;
         &:focus {
-          @apply crtCyan;
+          @apply crt-amber;
           outline: none;
-          border-color: var(--color-cyan);
+          border-color: var(--color-amber);
         }
         &::placeholder {
-          @apply crtWhite;
+          @apply crt-white;
           opacity: 60%;
         }
         &[type="password"] {
           font-family: theme(fontFamily.VT220Pass);
+        }
+        &:not(:placeholder-shown) + label {
+          opacity: 100%;
+          visibility: visible;
         }
       }
 
@@ -102,45 +106,56 @@
         text-transform: uppercase;
         visibility: hidden;
       }
-      input:not(:placeholder-shown) + label {
-        opacity: 60%;
-        visibility: visible;
-      }
 
       :global(.hint) {
-        @apply crtWhite;
+        @apply crt-white;
         padding: 0 10px;
         min-height: 30px;
-        /* background-color: var(--color-red); */
         visibility: hidden;
       }
 
       :global(.capslock-indicator) {
-        @apply crtAmber;
+        @apply crt-amber;
         position: absolute;
         top: 12px;
         right: 10px;
       }
-    }
 
-    /* Invalid FormFields */
-    :global(.form-field.invalid) {
-      input:not(:focus) {
-        @apply crtRed;
-        border-color: var(--color-red);
-
-        &::placeholder {
-          @apply crtRed;
+      /* Valid */
+      &:global(.valid) {
+        input {
+          &:focus {
+            @apply crt-cyan;
+            border-color: var(--color-cyan);
+          }
+          &:not(:focus) {
+            @apply crt-green;
+            border-color: var(--color-green);
+          }
+          &:not(:focus) + label {
+            @apply crt-green;
+          }
         }
       }
 
-      input:not(:focus) + label {
-        @apply crtRed;
-      }
+      /* Invalid */
+      &:global(.invalid) {
+        input {
+          &:not(:focus) {
+            @apply crt-red;
+            border-color: var(--color-red);
+            &::placeholder {
+              @apply crt-red;
+            }
+          }
+          &:not(:focus) + label {
+            @apply crt-red;
+          }
+        }
 
-      :global(.hint) {
-        /* @apply crtRed; */
-        visibility: visible;
+        :global(.hint) {
+          visibility: visible;
+        }
       }
     }
 
@@ -148,10 +163,10 @@
     :global(.form-submit) {
       button {
         background-color: var(--color-blue);
-      }
-      button:disabled {
-        opacity: 30%;
-        cursor: not-allowed;
+        &:disabled {
+          opacity: 40%;
+          cursor: not-allowed;
+        }
       }
     }
   }
