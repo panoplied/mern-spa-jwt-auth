@@ -3,6 +3,15 @@
   flex-direction: column;
   min-width: 280px;
   margin: 2em auto;
+  transition: all ease-in-out 0.5s;
+
+  &:global(.login) {
+    transform: rotateY(0deg);
+  }
+
+  &:global(.signup) {
+    transform: rotateY(360deg);
+  }
 
   /* Initial mode (when no login/signup choosen) */
   .initial {

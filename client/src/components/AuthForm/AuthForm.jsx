@@ -132,7 +132,7 @@ const AuthForm = ({ mode }) => {
   const Reset = () => <>{"><"}</>;
 
   return (
-    <Panel className={styles.auth}>
+    <Panel className={`${styles.auth} ${mode}`}>
       {mode === "initial" && <InitialMode />}
       {mode !== "initial" && (
         <>
