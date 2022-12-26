@@ -26,26 +26,37 @@ const AuthForm = ({ mode }) => {
   const [emailHint, setEmailHint] = useState("");
   const [passHint, setPassHint] = useState("");
 
-  const emailValidator = useCallback(async (email) => {
-    if (await validator.isEmail(email)) {
-      setEmailHint("");
-      return true;
-    } else {
-      setEmailHint("Please use a valid email");
-      return false;
-    }
-  }, [mode]);
+  const emailValidator = useCallback(
+    async (email) => {
+      if (await validator.isEmail(email)) {
+        setEmailHint("");
+        return true;
+      } else {
+        setEmailHint("Please use a valid email");
+        return false;
+      }
+    },
+    [mode]
+  );
 
-  const passwordValidator = useCallback(async (password) => {
-    // Don't validate for login, only for signup
-    if (mode === "login" || await validator.isStrongPassword(password, PASS_REQUIREMENTS)) {
-      setPassHint("");
-      return true;
-    } else {
-      setPassHint(<PasswordHint pwd={password} pwdReqs={PASS_REQUIREMENTS} />);
-      return false;
-    }
-  }, [mode]);
+  const passwordValidator = useCallback(
+    async (password) => {
+      // Don't validate for login, only for signup
+      if (
+        mode === "login" ||
+        (await validator.isStrongPassword(password, PASS_REQUIREMENTS))
+      ) {
+        setPassHint("");
+        return true;
+      } else {
+        setPassHint(
+          <PasswordHint pwd={password} pwdReqs={PASS_REQUIREMENTS} />
+        );
+        return false;
+      }
+    },
+    [mode]
+  );
 
   const { login, isPending: loginIsPending, error: loginError } = useLogin();
   const { signup, isPending: signupIsPending, error: signupError } = useSignup();
@@ -101,6 +112,10 @@ const AuthForm = ({ mode }) => {
     </div>
   );
 
+  const Reset = () => {
+    return <>{"><"}</>;
+  };
+
   return (
     <Panel className={styles.auth}>
       {mode === "initial" && <InitialMode />}
@@ -115,6 +130,7 @@ const AuthForm = ({ mode }) => {
               placeholder="EMAIL"
               validator={emailValidator}
               hint={emailHint}
+              resetterElement={<Reset />}
             />
             <FormField
               id={PASSWORD_ID}
@@ -123,7 +139,8 @@ const AuthForm = ({ mode }) => {
               placeholder="PASSWORD"
               validator={passwordValidator}
               hint={passHint}
-              optionalElements={<CapsLockIndicator />}
+              resetterElement={<Reset />}
+              additionalElements={<CapsLockIndicator />}
             />
             <FormSubmit
               form={FORM_ID}
