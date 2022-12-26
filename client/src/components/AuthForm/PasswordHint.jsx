@@ -43,12 +43,10 @@ const PasswordHint = ({ pwd, pwdReqs }) => {
   );
 };
 
-const PassCheck = ({ requirement, satisfied }) => {
-  return (
-    <li className={satisfied ? styles.satisfied : styles.unsatisfied}>
-      [{satisfied ? CHECKMARK_SYMBOL : " "}] {requirement}
-    </li>
-  );
-};
+const PassCheck = ({ requirement, satisfied }) => (
+  <li className={satisfied ? styles.satisfied : styles.unsatisfied}>
+    [{satisfied ? CHECKMARK_SYMBOL : " "}] {requirement}
+  </li>
+);
 
 export default PasswordHint;

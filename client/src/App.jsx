@@ -15,28 +15,25 @@ function App() {
 
   const title = "AEThERNA";
 
-  const Landing = () => {
-    return !user ? (
-      <>
-        <h1 className="title">{title}</h1>
-        <AuthForm mode="initial" />
-      </>
-    ) : (
+  const Landing = () =>
+    user ? (
       <>
         <h1 className="title small">{title}</h1>
         <UserProfile user={user} />
       </>
-    );
-  };
-
-  const Auth = ({ mode }) => {
-    return (
+    ) : (
       <>
-        <h1 className="title small">{title}</h1>
-        <AuthForm mode={mode} />
+        <h1 className="title">{title}</h1>
+        <AuthForm mode="initial" />
       </>
     );
-  };
+
+  const Auth = ({ mode }) => (
+    <>
+      <h1 className="title small">{title}</h1>
+      <AuthForm mode={mode} />
+    </>
+  );
 
   return (
     <>
@@ -46,10 +43,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={<Landing />}
-          />
+          <Route path="/" element={<Landing />} />
           <Route
             path="/login"
             element={!user ? <Auth mode="login" /> : <Navigate to="/" />}
