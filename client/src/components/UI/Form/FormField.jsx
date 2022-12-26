@@ -56,7 +56,7 @@ const FormField = (props) => {
         payload: { id, value, isValid: await validator(value) },
       });
     },
-    [value]
+    [value, validator]
   );
 
   // Instant validation on input: if the field is being edited,
@@ -74,7 +74,7 @@ const FormField = (props) => {
   }, [isRegistered, isTouched, dispatch, id, value, validate]);
 
   let styles = "form-field";
-  if (isValid && isTouched) {
+  if (isValid && isTouched && value) {
     styles = "form-field valid";
   }
   if (!isValid && isTouched) {
