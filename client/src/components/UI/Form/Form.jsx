@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 const formReducer = (fields, action) => {
   const { type, payload } = action;
-  if (type === "REGISTER" || type === "RESET") {
+  if (type === "REGISTER") {
     const { id, isRequired } = payload;
     return {
       ...fields,
@@ -30,6 +30,13 @@ const formReducer = (fields, action) => {
       [id]: { ...fields[id], value, isValid },
     };
   }
+  if (type === "RESET") {
+    const id = payload;
+    return {
+      ...fields,
+      [id]: { ...fields[id], value: "", isTouched: false, isValid: true },
+    };
+  }
   return fields;
 };
 
@@ -41,7 +48,10 @@ const Form = ({ children, id, onSubmit }) => {
   // Consider form invalid when it has invalid fields or empty required fields
   const formIsValid = (() => {
     for (const f in fields) {
-      if (!fields[f].isValid || (fields[f].isRequired && fields[f].value === "")) {
+      if (
+        !fields[f].isValid ||
+        (fields[f].isRequired && fields[f].value === "")
+      ) {
         return false;
       }
     }

@@ -10,6 +10,8 @@ const FormField = (props) => {
     placeholder,
     required = false,
     hint,
+    resetterElement,
+    additionalElements,
     validator = () => true, // if no validator provided, the field is always valid
   } = props;
 
@@ -73,6 +75,15 @@ const FormField = (props) => {
     };
   }, [isRegistered, isTouched, dispatch, id, value, validate]);
 
+  const resetHandler = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    dispatch({
+      type: "RESET",
+      payload: id,
+    });
+  };
+
   let styles = "form-field";
   if (isValid && isTouched && value) {
     styles = "form-field valid";
@@ -95,8 +106,11 @@ const FormField = (props) => {
         onBlur={blurHandler}
       />
       <label htmlFor={id}>{label}</label>
+      <div className="reset" onClick={resetHandler}>
+        {resetterElement}
+      </div>
       <div className="hint">{hint}</div>
-      {props.optionalElements}
+      {additionalElements}
     </div>
   );
 };
