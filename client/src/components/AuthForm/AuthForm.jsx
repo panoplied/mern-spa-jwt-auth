@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-import validator from "validator";
+import { isEmail, isStrongPassword } from "validator";
 
 import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
@@ -30,7 +30,7 @@ const AuthForm = ({ mode }) => {
 
   const emailValidator = useCallback(
     async (email) => {
-      if (await validator.isEmail(email)) {
+      if (await isEmail(email)) {
         setEmailHint("");
         return true;
       } else {
@@ -43,10 +43,9 @@ const AuthForm = ({ mode }) => {
 
   const passwordValidator = useCallback(
     async (password) => {
-      // Don't validate for login, only for signup
       if (
-        mode === "login" ||
-        (await validator.isStrongPassword(password, PASS_REQUIREMENTS))
+        mode === "login" || // Don't validate for login, only for signup
+        (await isStrongPassword(password, PASS_REQUIREMENTS))
       ) {
         setPassHint("");
         return true;
@@ -60,19 +59,10 @@ const AuthForm = ({ mode }) => {
     [mode]
   );
 
-  const {
-    login,
-    isPending: loginIsPending,
-    error: loginError,
-    setError: setLoginError,
-  } = useLogin();
-
-  const {
-    signup,
-    isPending: signupIsPending,
-    error: signupError,
-    setError: setSignupError,
-  } = useSignup();
+  const { login, isPending: loginIsPending, error: loginError, setError: setLoginError }
+    = useLogin();
+  const { signup, isPending: signupIsPending, error: signupError, setError: setSignupError }
+    = useSignup();
 
   useEffect(() => {
     setLoginError("");
@@ -163,7 +153,9 @@ const AuthForm = ({ mode }) => {
               disabled={loginIsPending || signupIsPending}
               disabledOnInvalid={true}
             >
-              {(loginIsPending || signupIsPending) ? "PENDING..." : mode.toUpperCase()}
+              {loginIsPending || signupIsPending
+                ? "PENDING..."
+                : mode.toUpperCase()}
             </FormSubmit>
           </Form>
           <FormFooter />
