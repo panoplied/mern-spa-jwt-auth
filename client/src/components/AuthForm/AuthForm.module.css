@@ -149,7 +149,7 @@
         visibility: hidden;
         opacity: 90%;
         user-select: none;
-        background-color: theme(colors.red.500);
+        background-color: theme(colors.neutral.800);
         &:hover {
           opacity: 100%;
           background-color: theme(colors.green.500);
