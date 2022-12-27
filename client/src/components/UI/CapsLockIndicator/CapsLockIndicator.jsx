@@ -16,7 +16,7 @@ const CapsLock = () => {
     };
   }, []);
 
-  return <div className="capslock-indicator">{caps ? "CAPS" : ""}</div>;
+  return <div className="capslock-indicator">{caps ? "CAPS" : ""}</div>;
 };
 
 export default CapsLock;
