@@ -11,7 +11,7 @@ RUN VITE_APP_API_HOST=${VITE_APP_API_HOST} VITE_APP_API_PORT=${VITE_APP_API_PORT
 
 # Stage 1, serve build with nginx
 FROM nginx:1.23.3-alpine
-COPY ./nginx.conf /etc/nginx/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /ui/dist/ /usr/share/nginx/html
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
