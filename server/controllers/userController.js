@@ -1,13 +1,12 @@
-const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
-
 const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
 
+const jwt = require("jsonwebtoken");
 const createAuthToken = (id) => {
   const token = jwt.sign({ id }, JWT_PRIVATE_KEY, { expiresIn: "30d" });
   return token;
 };
 
+const User = require("../models/userModel");
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {

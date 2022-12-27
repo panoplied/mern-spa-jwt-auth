@@ -1,15 +1,14 @@
-const ethers = require("ethers");
-
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
 const { ALCHEMY_BASE_URL, ALCHEMY_API_KEY } = process.env;
 const BLOCKS_AGO = 30;
 
+const ethers = require("ethers");
 const alchemy = new ethers.providers.AlchemyProvider(
   "homestead",
   ALCHEMY_API_KEY
 );
+
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const getNftTransfers = async (req, res) => {
   const latestBlock = await alchemy.getBlockNumber();

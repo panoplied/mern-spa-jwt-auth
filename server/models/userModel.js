@@ -1,9 +1,3 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const validator = require("validator");
-
-const SALT_ROUNDS = 10; // determines salt complexity for password hashing
-
 const PASS_REQUIREMENTS = {
   minLength: 6,
   minLowercase: 1,
@@ -12,6 +6,9 @@ const PASS_REQUIREMENTS = {
   minSymbols: 0,
 };
 
+const SALT_ROUNDS = 10; // determines salt complexity for password hashing
+
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -25,6 +22,9 @@ const userSchema = new Schema({
     required: true,
   },
 });
+
+const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 userSchema.statics.signup = async function (email, password) {
   if (!email || !password) {
