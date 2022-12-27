@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "MERN demo of SPA with JWT auth",
+    "short_name": "MERN demo",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
