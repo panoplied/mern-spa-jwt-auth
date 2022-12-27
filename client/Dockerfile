@@ -4,7 +4,10 @@ WORKDIR /ui
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+ARG VITE_APP_API_HOST
+ARG VITE_APP_API_PORT
+ARG VITE_APP_API_PATH
+RUN VITE_APP_API_HOST=${VITE_APP_API_HOST} VITE_APP_API_PORT=${VITE_APP_API_PORT} VITE_APP_API_PATH=${VITE_APP_API_PATH} && npm run build
 
 # Stage 1, serve build with nginx
 FROM nginx:1.23.3-alpine
